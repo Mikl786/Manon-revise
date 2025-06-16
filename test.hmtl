@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Brevet 2025 - Manon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            color: #333;
+        }
+        .subject-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .subject-btn:hover {
+            background: #5a6fd8;
+        }
+        .question {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        .answer {
+            background: #e9e9e9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .answer:hover {
+            background: #d4edda;
+        }
+        .answer.selected {
+            background: #007bff;
+            color: white;
+        }
+        .answer.correct {
+            background: #28a745;
+            color: white;
+        }
+        .answer.wrong {
+            background: #dc3545;
+            color: white;
+        }
+        .btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .explanation {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">🎓 Quiz Brevet 2025 - Manon révise</h1>
+    
+    <div class="container">
+        <div id="menu">
+            <h2>Choisis ta matière :</h2>
+            <button class="subject-btn" onclick="startQuiz('francais')">📚 Français</button>
+            <button class="subject-btn" onclick="startQuiz('maths')">📐 Mathématiques</button>
+            <button class="subject-btn" onclick="startQuiz('histoire')">🏛️ Histoire-Géo</button>
+            <button class="subject-btn" onclick="startQuiz('sciences')">🔬 Sciences</button>
+            <button class="subject-btn" onclick="startQuiz('physique')">⚡ Physique-Chimie</button>
+        </div>
+
+        <div id="quiz" class="hidden">
+            <div id="progress">Question <span id="current">1</span> sur <span id="total">5</span></div>
+            <div class="question" id="question">Question en cours de chargement...</div>
+            <div id="answers"></div>
+            <button class="btn" id="validate" onclick="validateAnswer()" disabled>Valider</button>
+            <button class="btn hidden" id="next" onclick="nextQuestion()">Question suivante</button>
+            <button class="btn hidden" id="restart" onclick="restartQuiz()">Recommencer</button>
+            <div id="explanation" class="explanation hidden"></div>
+        </div>
+
+        <div id="score" class="hidden">
+            <h2>Score final : <span id="final-score"></span></h2>
+            <button class="btn" onclick="backToMenu()">Retour au menu</button>
+        </div>
+    </div>
+
+    <script>
+        // Base de données simplifiée
+        const questions = {
+            francais: [
+                {
+                    q: "Quel genre littéraire explore le thème 'Se chercher, se construire' ?",
+                    a: ["L'autobiographie", "Le théâtre", "La poésie", "Le roman"],
+                    correct: 0,
+                    exp: "L'autobiographie permet d'explorer la construction de soi."
+                },
+                {
+                    q: "Combien de syllabes compte un alexandrin ?",
+                    a: ["10", "12", "8", "14"],
+                    correct: 1,
+                    exp: "L'alexandrin est un vers de douze syllabes."
+                },
+                {
+                    q: "Quelle figure de style : 'Ses yeux sont des étoiles' ?",
+                    a: ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+                    correct: 1,
+                    exp: "C'est une métaphore car il y a assimilation directe."
+                },
+                {
+                    q: "Au théâtre, un monologue est :",
+                    a: ["Un dialogue", "Un discours seul", "Une indication", "Un acte"],
+                    correct: 1,
+                    exp: "Le monologue est un discours d'un personnage seul."
+                },
+                {
+                    q: "Dans un sonnet, il y a :",
+                    a: ["12 vers", "14 vers", "16 vers", "18 vers"],
+                    correct: 1,
+                    exp: "Le sonnet comporte 14 vers : 2 quatrains et 2 tercets."
+                }
+            ],
+            maths: [
+                {
+                    q: "Résoudre : 3x + 5 = 14",
+                    a: ["x = 3", "x = 4", "x = 5", "x = 6"],
+                    correct: 0,
+                    exp: "3x = 14 - 5 = 9, donc x = 3"
+                },
+                {
+                    q: "Si f(x) = 2x + 3, que vaut f(4) ?",
+                    a: ["11", "10", "9", "8"],
+                    correct: 0,
+                    exp: "f(4) = 2×4 + 3 = 11"
+                },
+                {
+                    q: "Théorème de Pythagore : côtés 3 et 4, hypoténuse ?",
+                    a: ["5", "6", "7", "25"],
+                    correct: 0,
+                    exp: "c² = 3² + 4² = 25, donc c = 5"
+                },
+                {
+                    q: "Médiane de : 2, 5, 7, 8, 10",
+                    a: ["6", "7", "8", "6.4"],
+                    correct: 1,
+                    exp: "La médiane est la valeur centrale : 7"
+                },
+                {
+                    q: "Développer : (x + 3)(x - 2)",
+                    a: ["x² + x - 6", "x² - x - 6", "x² + x + 6", "x² - x + 6"],
+                    correct: 0,
+                    exp: "(x+3)(x-2) = x² + x - 6"
+                }
+            ],
+            histoire: [
+                {
+                    q: "Date de l'indépendance de l'Inde ?",
+                    a: ["1945", "1947", "1950", "1952"],
+                    correct: 1,
+                    exp: "L'Inde obtient son indépendance le 15 août 1947."
+                },
+                {
+                    q: "La Ve République est fondée en :",
+                    a: ["1956", "1958", "1960", "1962"],
+                    correct: 1,
+                    exp: "Constitution adoptée par référendum le 28 septembre 1958."
+                },
+                {
+                    q: "La guerre froide commence vers :",
+                    a: ["1945", "1947", "1949", "1950"],
+                    correct: 1,
+                    exp: "1947 marque le début avec la doctrine Truman."
+                },
+                {
+                    q: "Droit de vote des femmes en France :",
+                    a: ["1936", "1944", "1946", "1958"],
+                    correct: 1,
+                    exp: "Ordonnance du 21 avril 1944."
+                },
+                {
+                    q: "Le mur de Berlin est construit en :",
+                    a: ["1959", "1961", "1963", "1965"],
+                    correct: 1,
+                    exp: "Nuit du 12 au 13 août 1961."
+                }
+            ],
+            sciences: [
+                {
+                    q: "La fécondation a lieu dans :",
+                    a: ["L'ovaire", "L'utérus", "La trompe de Fallope", "Le vagin"],
+                    correct: 2,
+                    exp: "La fécondation se produit dans la trompe de Fallope."
+                },
+                {
+                    q: "Un chromosome contient :",
+                    a: ["De l'ARN", "De l'ADN", "Des protéines", "Des lipides"],
+                    correct: 1,
+                    exp: "Les chromosomes sont constitués d'ADN et de protéines."
+                },
+                {
+                    q: "L'être humain possède :",
+                    a: ["23 chromosomes", "46 chromosomes", "48 chromosomes", "44 chromosomes"],
+                    correct: 1,
+                    exp: "46 chromosomes (23 paires) dans chaque cellule."
+                },
+                {
+                    q: "La dérive des continents est proposée par :",
+                    a: ["Darwin", "Wegener", "Mendel", "Pasteur"],
+                    correct: 1,
+                    exp: "Alfred Wegener en 1912."
+                },
+                {
+                    q: "Le neurone est :",
+                    a: ["Une cellule musculaire", "Une cellule nerveuse", "Une cellule sanguine", "Une cellule osseuse"],
+                    correct: 1,
+                    exp: "Cellule de base du système nerveux."
+                }
+            ],
+            physique: [
+                {
+                    q: "Un atome est constitué :",
+                    a: ["Seulement de protons", "D'un noyau et d'électrons", "Seulement d'électrons", "De molécules"],
+                    correct: 1,
+                    exp: "Noyau (protons + neutrons) et électrons."
+                },
+                {
+                    q: "La vitesse se calcule par :",
+                    a: ["v = d × t", "v = d / t", "v = t / d", "v = d + t"],
+                    correct: 1,
+                    exp: "Vitesse = distance / temps"
+                },
+                {
+                    q: "Circuit en série, l'intensité :",
+                    a: ["Varie", "Est la même partout", "Diminue", "Augmente"],
+                    correct: 1,
+                    exp: "L'intensité est identique en tous points."
+                },
+                {
+                    q: "Charge d'un proton :",
+                    a: ["Positive", "Négative", "Neutre", "Variable"],
+                    correct: 0,
+                    exp: "Le proton porte une charge positive."
+                },
+                {
+                    q: "Formule chimique de l'eau :",
+                    a: ["H₂O", "HO₂", "H₃O", "H₂O₂"],
+                    correct: 0,
+                    exp: "2 atomes d'hydrogène et 1 atome d'oxygène."
+                }
+            ]
+        };
+
+        let currentSubject = '';
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let selectedAnswer = -1;
+
+        function startQuiz(subject) {
+            currentSubject = subject;
+            currentQuestions = questions[subject];
+            currentIndex = 0;
+            score = 0;
+            
+            document.getElementById('menu').classList.add('hidden');
+            document.getElementById('quiz').classList.remove('hidden');
+            document.getElementById('score').classList.add('hidden');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = currentQuestions[currentIndex];
+            document.getElementById('current').textContent = currentIndex + 1;
+            document.getElementById('total').textContent = currentQuestions.length;
+            document.getElementById('question').textContent = q.q;
+            
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            
+            q.a.forEach((answer, index) => {
+                const div = document.createElement('div');
+                div.className = 'answer';
+                div.textContent = answer;
+                div.onclick = () => selectAnswer(index);
+                answersDiv.appendChild(div);
+            });
+            
+            document.getElementById('validate').disabled = true;
+            document.getElementById('next').classList.add('hidden');
+            document.getElementById('restart').classList.add('hidden');
+            document.getElementById('explanation').classList.add('hidden');
+            selectedAnswer = -1;
+        }
+
+        function selectAnswer(index) {
+            selectedAnswer = index;
+            document.querySelectorAll('.answer').forEach((el, i) => {
+                el.classList.remove('selected');
+                if (i === index) el.classList.add('selected');
+            });
+            document.getElementById('validate').disabled = false;
+        }
+
+        function validateAnswer() {
+            const q = currentQuestions[currentIndex];
+            const isCorrect = selectedAnswer === q.correct;
+            
+            if (isCorrect) score++;
+            
+            document.querySelectorAll('.answer').forEach((el, i) => {
+                if (i === q.correct) {
+                    el.classList.add('correct');
+                } else if (i === selectedAnswer && !isCorrect) {
+                    el.classList.add('wrong');
+                }
+                el.onclick = null;
+            });
+            
+            document.getElementById('explanation').textContent = q.exp;
+            document.getElementById('explanation').classList.remove('hidden');
+            document.getElementById('validate').classList.add('hidden');
+            
+            if (currentIndex < currentQuestions.length - 1) {
+                document.getElementById('next').classList.remove('hidden');
+            } else {
+                document.getElementById('restart').classList.remove('hidden');
+                showFinalScore();
+            }
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            showQuestion();
+        }
+
+        function restartQuiz() {
+            startQuiz(currentSubject);
+        }
+
+        function showFinalScore() {
+            const percentage = Math.round((score / currentQuestions.length) * 100);
+            document.getElementById('final-score').textContent = 
+                `${score}/${currentQuestions.length} (${percentage}%)`;
+            document.getElementById('score').classList.remove('hidden');
+        }
+
+        function backToMenu() {
+            document.getElementById('menu').classList.remove('hidden');
+            document.getElementById('quiz').classList.add('hidden');
+            document.getElementById('score').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
