@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Brevet 2025 - Préparation Complète</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <meta name="description" content="Préparez le brevet 2025 avec plus de 1000 questions interactives dans toutes les matières">
+    <meta name="keywords" content="brevet, quiz, révision, 2025, français, mathématiques, histoire, géographie, sciences, physique, chimie">
+</head>
+<body>
+    <!-- Navigation fixe -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">Quiz Brevet 2025</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Accueil</a>
+                <a href="#quiz" class="nav-link">Quiz</a>
+                <a href="#stats" class="nav-link">Statistiques</a>
+                <a href="#progress" class="nav-link">Progrès</a>
+                <a href="#about" class="nav-link">À propos</a>
+            </div>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Section Hero avec animations -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title animate-fade-in">Réussis ton Brevet 2025 !</h1>
+                <p class="hero-subtitle animate-fade-in-delay">Plus de 1000 questions pour te préparer efficacement dans toutes les matières</p>
+                
+                <div class="hero-stats animate-slide-up">
+                    <div class="stat-item">
+                        <span class="stat-number counter" data-target="1000">0</span>
+                        <span class="stat-label">Questions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number counter" data-target="5">0</span>
+                        <span class="stat-label">Matières</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number counter" data-target="100">0</span>
+                        <span class="stat-label">% Gratuit</span>
+                    </div>
+                </div>
+                
+                <button class="cta-button animate-bounce" onclick="scrollToQuiz()">
+                    Commencer maintenant
+                    <span class="button-icon">🚀</span>
+                </button>
+                
+                <div class="hero-features">
+                    <div class="feature-badge">✅ Conforme au programme 2025</div>
+                    <div class="feature-badge">📱 Compatible mobile</div>
+                    <div class="feature-badge">📊 Suivi des progrès</div>
+                </div>
+            </div>
+            
+            <div class="hero-animation">
+                <div class="floating-elements">
+                    <div class="element math">📐</div>
+                    <div class="element french">📚</div>
+                    <div class="element history">🏛️</div>
+                    <div class="element science">🔬</div>
+                    <div class="element physics">⚡</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Sélection de matière améliorée -->
+        <section id="quiz" class="quiz-section">
+            <div class="container">
+                <h2 class="section-title">Choisis ta matière</h2>
+                <p class="section-subtitle">Sélectionne une matière pour commencer ton quiz personnalisé</p>
+                
+                <div class="subjects-grid">
+                    <div class="subject-card" data-subject="francais">
+                        <div class="card-header">
+                            <div class="card-icon">📚</div>
+                            <div class="difficulty-badge">Niveau 3ème</div>
+                        </div>
+                        <h3>Français</h3>
+                        <p>Grammaire, littérature, expression écrite et analyse de textes</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">questions</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="francais-score">0%</span>
+                                <span class="stat-label">réussite</span>
+                            </div>
+                        </div>
+                        <div class="progress-mini">
+                            <div class="progress-fill" id="francais-progress"></div>
+                        </div>
+                        <button class="start-quiz-btn" onclick="startQuiz('francais')">
+                            Commencer
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+
+                    <div class="subject-card" data-subject="maths">
+                        <div class="card-header">
+                            <div class="card-icon">📐</div>
+                            <div class="difficulty-badge">Niveau 3ème</div>
+                        </div>
+                        <h3>Mathématiques</h3>
+                        <p>Algèbre, géométrie, statistiques et fonctions</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">questions</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="maths-score">0%</span>
+                                <span class="stat-label">réussite</span>
+                            </div>
+                        </div>
+                        <div class="progress-mini">
+                            <div class="progress-fill" id="maths-progress"></div>
+                        </div>
+                        <button class="start-quiz-btn" onclick="startQuiz('maths')">
+                            Commencer
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+
+                    <div class="subject-card" data-subject="histoire">
+                        <div class="card-header">
+                            <div class="card-icon">🏛️</div>
+                            <div class="difficulty-badge">Niveau 3ème</div>
+                        </div>
+                        <h3>Histoire-Géographie</h3>
+                        <p>Histoire contemporaine, géographie et EMC</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">questions</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="histoire-score">0%</span>
+                                <span class="stat-label">réussite</span>
+                            </div>
+                        </div>
+                        <div class="progress-mini">
+                            <div class="progress-fill" id="histoire-progress"></div>
+                        </div>
+                        <button class="start-quiz-btn" onclick="startQuiz('histoire')">
+                            Commencer
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+
+                    <div class="subject-card" data-subject="sciences">
+                        <div class="card-header">
+                            <div class="card-icon">🔬</div>
+                            <div class="difficulty-badge">Niveau 3ème</div>
+                        </div>
+                        <h3>Sciences (SVT)</h3>
+                        <p>Biologie, géologie et environnement</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">questions</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="sciences-score">0%</span>
+                                <span class="stat-label">réussite</span>
+                            </div>
+                        </div>
+                        <div class="progress-mini">
+                            <div class="progress-fill" id="sciences-progress"></div>
+                        </div>
+                        <button class="start-quiz-btn" onclick="startQuiz('sciences')">
+                            Commencer
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+
+                    <div class="subject-card" data-subject="physique">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <div class="difficulty-badge">Niveau 3ème</div>
+                        </div>
+                        <h3>Physique-Chimie</h3>
+                        <p>Mécanique, électricité et chimie</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">questions</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="physique-score">0%</span>
+                                <span class="stat-label">réussite</span>
+                            </div>
+                        </div>
+                        <div class="progress-mini">
+                            <div class="progress-fill" id="physique-progress"></div>
+                        </div>
+                        <button class="start-quiz-btn" onclick="startQuiz('physique')">
+                            Commencer
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interface de Quiz améliorée -->
+        <section id="quiz-container" class="quiz-container hidden">
+            <div class="quiz-header">
+                <button class="back-btn" onclick="backToSubjects()">
+                    <span class="back-icon">←</span>
+                    Retour
+                </button>
+                <div class="quiz-info">
+                    <span id="current-subject" class="subject-name"></span>
+                    <span id="question-counter" class="question-counter">Question 1/20</span>
+                </div>
+                <div class="quiz-timer">
+                    <span class="timer-icon">⏱️</span>
+                    <span id="timer" class="timer-text">00:00</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                <div class="score-display">
+                    <div class="score-item">
+                        <span class="score-label">Score:</span>
+                        <span id="current-score" class="score-value">0/0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Réussite:</span>
+                        <span id="percentage" class="score-percentage">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-header">
+                    <span class="question-number" id="question-number">Question 1</span>
+                    <div class="question-difficulty">
+                        <span class="difficulty-stars" id="difficulty">★★☆</span>
+                    </div>
+                </div>
+                
+                <div class="question-text" id="question-text">Chargement de la question...</div>
+                
+                <div class="answers-grid" id="answers">
+                    <!-- Réponses générées dynamiquement -->
+                </div>
+                
+                <div class="quiz-controls">
+                    <button id="validate-btn" class="btn btn-primary" disabled>
+                        <span class="btn-icon">✓</span>
+                        Valider ma réponse
+                    </button>
+                    <button id="next-btn" class="btn btn-success hidden">
+                        Question suivante
+                        <span class="btn-icon">→</span>
+                    </button>
+                    <button id="restart-btn" class="btn btn-info hidden">
+                        <span class="btn-icon">🔄</span>
+                        Recommencer
+                    </button>
+                </div>
+                
+                <div id="explanation" class="explanation hidden">
+                    <!-- Explication de la réponse -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Statistiques avancées -->
+        <section id="stats" class="stats-section">
+            <div class="container">
+                <h2 class="section-title">Tes statistiques</h2>
+                <p class="section-subtitle">Suis tes progrès et identifie tes points forts</p>
+                
+                <div class="stats-dashboard">
+                    <div class="global-stats">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-content">
+                                <span class="stat-value" id="global-score">0%</span>
+                                <span class="stat-label">Score global</span>
+                            </div>
+                            <div class="stat-trend" id="global-trend">
+                                <span class="trend-icon">📈</span>
+                                <span class="trend-text">En progression</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card secondary">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <span class="stat-value" id="total-questions">0</span>
+                                <span class="stat-label">Questions répondues</span>
+                            </div>
+                            <div class="stat-detail">
+                                <span id="correct-answers">0</span> bonnes réponses
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card success">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-content">
+                                <span class="stat-value" id="best-subject">-</span>
+                                <span class="stat-label">Meilleure matière</span>
+                            </div>
+                            <div class="stat-detail">
+                                <span id="best-score">0%</span> de réussite
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card warning">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-content">
+                                <span class="stat-value" id="avg-time">0s</span>
+                                <span class="stat-label">Temps moyen</span>
+                            </div>
+                            <div class="stat-detail">
+                                Par question
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subjects-stats-detailed">
+                        <h3>Détail par matière</h3>
+                        <div class="subjects-grid-stats" id="subjects-stats">
+                            <!-- Statistiques détaillées par matière -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Progrès -->
+        <section id="progress" class="progress-section">
+            <div class="container">
+                <h2 class="section-title">Ton parcours de révision</h2>
+                <div class="progress-dashboard">
+                    <div class="achievement-cards">
+                        <div class="achievement-card" id="streak-card">
+                            <div class="achievement-icon">🔥</div>
+                            <div class="achievement-content">
+                                <span class="achievement-value" id="streak-count">0</span>
+                                <span class="achievement-label">Jours consécutifs</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card" id="level-card">
+                            <div class="achievement-icon">🏆</div>
+                            <div class="achievement-content">
+                                <span class="achievement-value" id="user-level">Débutant</span>
+                                <span class="achievement-label">Niveau actuel</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="badges-section">
+                        <h3>Badges obtenus</h3>
+                        <div class="badges-grid" id="badges-container">
+                            <!-- Badges générés dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section À propos améliorée -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">À propos du Quiz Brevet 2025</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Un outil de révision moderne et efficace</h3>
+                        <p>Ce site a été conçu spécialement pour aider les élèves de 3ème à préparer leur brevet des collèges. Avec plus de 1000 questions soigneusement sélectionnées selon les programmes officiels 2025, c'est l'outil idéal pour réviser de manière interactive et ludique.</p>
+                        
+                        <h3>Fonctionnalités principales</h3>
+                        <ul class="features-list">
+                            <li>✅ Questions conformes au programme 2025</li>
+                            <li>✅ Explications détaillées pour chaque réponse</li>
+                            <li>✅ Suivi des progrès en temps réel</li>
+                            <li>✅ Interface responsive (mobile, tablette, PC)</li>
+                            <li>✅ Sauvegarde automatique des statistiques</li>
+                            <li>✅ Système de badges et récompenses</li>
+                            <li>✅ Timer et statistiques de performance</li>
+                        </ul>
+                        
+                        <h3>Conseils pour bien réviser</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <div class="tip-icon">📅</div>
+                                <h4>Régularité</h4>
+                                <p>Fais un quiz par jour pour maintenir ton niveau</p>
+                            </div>
+                            <div class="tip-card">
+                                <div class="tip-icon">🎯</div>
+                                <h4>Focus</h4>
+                                <p>Concentre-toi sur tes matières les plus faibles</p>
+                            </div>
+                            <div class="tip-card">
+                                <div class="tip-icon">📝</div>
+                                <h4>Notes</h4>
+                                <p>Prends des notes sur tes erreurs récurrentes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer amélioré -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quiz Brevet 2025</h4>
+                    <p>Ton allié pour réussir le brevet des collèges</p>
+                    <div class="social-links">
+                        <span class="social-link">📧 Contact</span>
+                        <span class="social-link">📱 Mobile</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Matières</h4>
+                    <ul>
+                        <li>📚 Français (200 questions)</li>
+                        <li>📐 Mathématiques (200 questions)</li>
+                        <li>🏛️ Histoire-Géographie (200 questions)</li>
+                        <li>🔬 Sciences SVT (200 questions)</li>
+                        <li>⚡ Physique-Chimie (200 questions)</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li>📖 Guide de révision</li>
+                        <li>💡 Conseils méthodologiques</li>
+                        <li>📅 Planning de révision</li>
+                        <li>🏆 Système de badges</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Statistiques</h4>
+                    <div class="footer-stats">
+                        <div class="footer-stat">
+                            <span class="stat-number" id="footer-total-questions">0</span>
+                            <span class="stat-label">Questions répondues</span>
+                        </div>
+                        <div class="footer-stat">
+                            <span class="stat-number" id="footer-success-rate">0%</span>
+                            <span class="stat-label">Taux de réussite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Quiz Brevet. Fait avec ❤️ pour la réussite des élèves.</p>
+                <p class="footer-version">Version 2.0 - Dernière mise à jour: Juin 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
