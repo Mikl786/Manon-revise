@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "La fécondation a lieu dans :",
+    "answers": ["L'ovaire", "L'utérus", "La trompe de Fallope", "Le vagin"],
+    "correct": 2,
+    "explanation": "La fécondation se produit dans la trompe de Fallope, aussi appelée trompe utérine.",
+    "difficulty": "facile",
+    "theme": "reproduction"
+  },
+  {
+    "id": 2,
+    "question": "Un chromosome contient :",
+    "answers": ["De l'ARN", "De l'ADN", "Des protéines", "Des lipides"],
+    "correct": 1,
+    "explanation": "Les chromosomes sont constitués d'ADN (acide désoxyribonucléique) et de protéines.",
+    "difficulty": "facile",
+    "theme": "genetique"
+  },
+  {
+    "id": 3,
+    "question": "L'être humain possède :",
+    "answers": ["23 chromosomes", "46 chromosomes", "48 chromosomes", "44 chromosomes"],
+    "correct": 1,
+    "explanation": "L'être humain possède 46 chromosomes (23 paires) dans chaque cellule.",
+    "difficulty": "facile",
+    "theme": "genetique"
+  },
+  {
+    "id": 4,
+    "question": "La dérive des continents est proposée par :",
+    "answers": ["Darwin", "Wegener", "Mendel", "Pasteur"],
+    "correct": 1,
+    "explanation": "Alfred Wegener propose la théorie de la dérive des continents en 1912.",
+    "difficulty": "moyen",
+    "theme": "geologie"
+  },
+  {
+    "id": 5,
+    "question": "Le neurone est :",
+    "answers": ["Une cellule musculaire", "Une cellule nerveuse", "Une cellule sanguine", "Une cellule osseuse"],
+    "correct": 1,
+    "explanation": "Le neurone est la cellule de base du système nerveux qui transmet l'information.",
+    "difficulty": "facile",
+    "theme": "systeme_nerveux"
+  },
+  {
+    "id": 6,
+    "question": "Les anticorps sont produits par :",
+    "answers": ["Les globules rouges", "Les lymphocytes B", "Les lymphocytes T", "Les plaquettes"],
+    "correct": 1,
+    "explanation": "Les lymphocytes B se transforment en plasmocytes qui produisent les anticorps.",
+    "difficulty": "moyen",
+    "theme": "immunite"
+  },
+  {
+    "id": 7,
+    "question": "Les gamètes contiennent :",
+    "answers": ["23 chromosomes", "46 chromosomes", "22 chromosomes", "24 chromosomes"],
+    "correct": 0,
+    "explanation": "Les gamètes (spermatozoïdes et ovules) contiennent 23 chromosomes (haploïdes).",
+    "difficulty": "moyen",
+    "theme": "reproduction"
+  },
+  {
+    "id": 8,
+    "question": "Les plaques tectoniques se déplacent à une vitesse de :",
+    "answers": ["Quelques mm par an", "Quelques cm par an", "Quelques m par an", "Quelques km par an"],
+    "correct": 1,
+    "explanation": "Les plaques tectoniques se déplacent de quelques centimètres par an.",
+    "difficulty": "moyen",
+    "theme": "geologie"
+  },
+  {
+    "id": 9,
+    "question": "La myéline permet :",
+    "answers": ["La nutrition du neurone", "L'accélération de l'influx nerveux", "La reproduction", "La respiration"],
+    "correct": 1,
+    "explanation": "La gaine de myéline isole l'axone et accélère la transmission de l'influx nerveux.",
+    "difficulty": "difficile",
+    "theme": "systeme_nerveux"
+  },
+  {
+    "id": 10,
+    "question": "Un antigène est :",
+    "answers": ["Un anticorps", "Une substance étrangère", "Un globule blanc", "Un virus"],
+    "correct": 1,
+    "explanation": "Un antigène est toute substance étrangère capable de déclencher une réponse immunitaire.",
+    "difficulty": "moyen",
+    "theme": "immunite"
+  },
+  {
+    "id": 11,
+    "question": "La puberté correspond à :",
+    "answers": ["La croissance", "La maturation sexuelle", "L'adolescence", "Le développement"],
+    "correct": 1,
+    "explanation": "La puberté est la période de maturation sexuelle qui rend la reproduction possible.",
+    "difficulty": "facile",
+    "theme": "reproduction"
+  },
+  {
+    "id": 12,
+    "question": "Un séisme résulte :",
+    "answers": ["D'une éruption volcanique", "Du mouvement des plaques", "De l'érosion", "Du vent"],
+    "correct": 1,
+    "explanation": "Les séismes sont causés par les mouvements et frictions entre les plaques tectoniques.",
+    "difficulty": "facile",
+    "theme": "geologie"
+  },
+  {
+    "id": 13,
+    "question": "Un réflexe est :",
+    "answers": ["Une réponse volontaire", "Une réponse automatique", "Une réponse lente", "Une réponse consciente"],
+    "correct": 1,
+    "explanation": "Le réflexe est une réponse automatique et involontaire à un stimulus.",
+    "difficulty": "facile",
+    "theme": "systeme_nerveux"
+  },
+  {
+    "id": 14,
+    "question": "La vaccination consiste à :",
+    "answers": ["Injecter des anticorps", "Stimuler la production d'anticorps", "Détruire les virus", "Renforcer les muscles"],
+    "correct": 1,
+    "explanation": "La vaccination stimule le système immunitaire pour qu'il produise ses propres anticorps.",
+    "difficulty": "moyen",
+    "theme": "immunite"
+  },
+  {
+    "id": 15,
+    "question": "L'échelle de Richter mesure :",
+    "answers": ["La durée d'un séisme", "L'intensité d'un séisme", "La magnitude d'un séisme", "La profondeur d'un séisme"],
+    "correct": 2,
+    "explanation": "L'échelle de Richter mesure la magnitude, c'est-à-dire l'énergie libérée par un séisme.",
+    "difficulty": "moyen",
+    "theme": "geologie"
+  },
+  {
+    "id": 16,
+    "question": "Le cerveau consomme environ quel pourcentage de l'énergie du corps ?",
+    "answers": ["10%", "20%", "30%", "40%"],
+    "correct": 1,
+    "explanation": "Le cerveau consomme environ 20% de l'énergie totale du corps humain.",
+    "difficulty": "difficile",
+    "theme": "systeme_nerveux"
+  },
+  {
+    "id": 17,
+    "question": "La mémoire immunitaire permet :",
+    "answers": ["Une réponse plus rapide", "Une réponse plus lente", "Aucune réponse", "Une réponse identique"],
+    "correct": 0,
+    "explanation": "La mémoire immunitaire permet une réponse plus rapide et efficace lors d'un second contact.",
+    "difficulty": "moyen",
+    "theme": "immunite"
+  },
+  {
+    "id": 18,
+    "question": "Les fossiles permettent de :",
+    "answers": ["Dater les roches", "Reconstituer l'évolution", "Comprendre les paléoenvironnements", "Toutes ces réponses"],
+    "correct": 3,
+    "explanation": "Les fossiles sont des témoins de l'évolution et des environnements du passé.",
+    "difficulty": "moyen",
+    "theme": "evolution"
+  },
+  {
+    "id": 19,
+    "question": "La substance grise contient principalement :",
+    "answers": ["Les axones", "Les corps cellulaires", "La myéline", "Les vaisseaux sanguins"],
+    "correct": 1,
+    "explanation": "La substance grise contient les corps cellulaires des neurones.",
+    "difficulty": "difficile",
+    "theme": "systeme_nerveux"
+  },
+  {
+    "id": 20,
+    "question": "Le SIDA affecte :",
+    "answers": ["Les globules rouges", "Le système immunitaire", "Le système digestif", "Le système respiratoire"],
+    "correct": 1,
+    "explanation": "Le VIH détruit les lymphocytes T4, affaiblissant le système immunitaire.",
+    "difficulty": "moyen",
+    "theme": "immunite"
+  }
+]
