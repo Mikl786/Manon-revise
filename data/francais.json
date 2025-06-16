@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "question": "Quel genre littéraire est privilégié pour explorer le thème 'Se chercher, se construire' ?",
+    "answers": ["L'autobiographie", "Le théâtre", "La poésie", "Le roman policier"],
+    "correct": 0,
+    "explanation": "L'autobiographie permet d'explorer la construction de soi et l'identité personnelle, thème central du programme de 3ème.",
+    "difficulty": "facile",
+    "theme": "genres_litteraires"
+  },
+  {
+    "id": 2,
+    "question": "Dans 'Les Confessions' de Rousseau, quel est l'objectif principal de l'auteur ?",
+    "answers": ["Divertir le lecteur", "Se justifier et se révéler", "Critiquer la société", "Raconter l'Histoire"],
+    "correct": 1,
+    "explanation": "Rousseau cherche à se montrer tel qu'il est, avec ses défauts et qualités, dans un souci de sincérité totale.",
+    "difficulty": "moyen",
+    "theme": "autobiographie"
+  },
+  {
+    "id": 3,
+    "question": "Identifiez la figure de style : 'Ses yeux sont des étoiles'",
+    "answers": ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+    "correct": 1,
+    "explanation": "C'est une métaphore car il y a assimilation directe sans outil de comparaison comme 'comme' ou 'tel que'.",
+    "difficulty": "facile",
+    "theme": "figures_de_style"
+  },
+  {
+    "id": 4,
+    "question": "Au théâtre, comment appelle-t-on les paroles qu'un personnage se dit à lui-même ?",
+    "answers": ["Monologue", "Dialogue", "Aparté", "Soliloque"],
+    "correct": 0,
+    "explanation": "Le monologue est un discours d'un personnage seul sur scène qui exprime ses pensées.",
+    "difficulty": "facile",
+    "theme": "theatre"
+  },
+  {
+    "id": 5,
+    "question": "Combien de syllabes compte un alexandrin ?",
+    "answers": ["10", "12", "8", "14"],
+    "correct": 1,
+    "explanation": "L'alexandrin est un vers de douze syllabes, très utilisé en poésie classique française.",
+    "difficulty": "facile",
+    "theme": "versification"
+  }
+]
