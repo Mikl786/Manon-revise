@@ -458,8 +458,6 @@
             display: none;
         }
         
-        .hidden { display: none; }
-        
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .subjects-grid { grid-template-columns: 1fr; }
@@ -494,7 +492,7 @@
     <div class="container">
         <header>
             <h1>🎓 Manon révise le Brevet 2025</h1>
-            <p class="subtitle">Plus de 500 questions pour réussir ton brevet !</p>
+            <p class="subtitle">Plus de 50 questions pour réussir ton brevet !</p>
             
             <div class="motivation-bar">
                 <div class="level-info">
@@ -513,7 +511,7 @@
                     <div class="card-description">Grammaire, littérature, expression écrite et analyse de textes</div>
                     <div class="card-stats">
                         <div class="stat-item">
-                            <div class="stat-number">100</div>
+                            <div class="stat-number">10</div>
                             <div class="stat-label">questions</div>
                         </div>
                         <div class="stat-item">
@@ -540,7 +538,7 @@
                     <div class="card-description">Algèbre, géométrie, statistiques et fonctions</div>
                     <div class="card-stats">
                         <div class="stat-item">
-                            <div class="stat-number">100</div>
+                            <div class="stat-number">10</div>
                             <div class="stat-label">questions</div>
                         </div>
                         <div class="stat-item">
@@ -567,7 +565,7 @@
                     <div class="card-description">Histoire contemporaine, géographie et EMC</div>
                     <div class="card-stats">
                         <div class="stat-item">
-                            <div class="stat-number">100</div>
+                            <div class="stat-number">10</div>
                             <div class="stat-label">questions</div>
                         </div>
                         <div class="stat-item">
@@ -594,7 +592,7 @@
                     <div class="card-description">Biologie, géologie et environnement</div>
                     <div class="card-stats">
                         <div class="stat-item">
-                            <div class="stat-number">100</div>
+                            <div class="stat-number">10</div>
                             <div class="stat-label">questions</div>
                         </div>
                         <div class="stat-item">
@@ -621,7 +619,7 @@
                     <div class="card-description">Mécanique, électricité et chimie</div>
                     <div class="card-stats">
                         <div class="stat-item">
-                            <div class="stat-number">100</div>
+                            <div class="stat-number">10</div>
                             <div class="stat-label">questions</div>
                         </div>
                         <div class="stat-item">
@@ -651,7 +649,7 @@
                 </button>
                 <div class="progress-info">
                     <span id="current-subject"></span> - 
-                    Question <span id="current-question">1</span> sur <span id="total-questions">20</span>
+                    Question <span id="current-question">1</span> sur <span id="total-questions">10</span>
                 </div>
                 <div class="score-info">
                     Score: <span id="current-score">0</span>/<span id="total-answered">0</span>
@@ -690,159 +688,90 @@
                 </div>
             </div>
         </div>
+
+        <div id="loading" class="loading-screen hidden">
+            <div class="spinner"></div>
+            <p>Chargement des questions...</p>
+        </div>
     </div>
 
     <script>
-        // Base de données de 500 questions (100 par matière)
+        // Base de données des questions (10 par matière = 50 questions au total)
         const questionsDatabase = {
             francais: [
-                // 100 questions de français
                 {
                     question: "Quel genre littéraire est privilégié pour explorer le thème 'Se chercher, se construire' ?",
                     answers: ["L'autobiographie", "Le théâtre", "La poésie", "Le roman policier"],
                     correct: 0,
-                    explanation: "L'autobiographie permet d'explorer la construction de soi et l'identité personnelle.",
+                    explanation: "L'autobiographie permet d'explorer la construction de soi et l'identité personnelle, thème central du programme de 3ème.",
                     difficulty: "facile"
                 },
                 {
                     question: "Dans 'Les Confessions' de Rousseau, quel est l'objectif principal de l'auteur ?",
                     answers: ["Divertir le lecteur", "Se justifier et se révéler", "Critiquer la société", "Raconter l'Histoire"],
                     correct: 1,
-                    explanation: "Rousseau cherche à se montrer tel qu'il est, avec ses défauts et qualités.",
+                    explanation: "Rousseau cherche à se montrer tel qu'il est, avec ses défauts et qualités, dans un souci de sincérité totale.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Identifiez la figure de style : 'Ses yeux sont des étoiles'",
                     answers: ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
                     correct: 1,
-                    explanation: "C'est une métaphore car il y a assimilation directe sans outil de comparaison.",
+                    explanation: "C'est une métaphore car il y a assimilation directe sans outil de comparaison comme 'comme' ou 'tel que'.",
                     difficulty: "facile"
                 },
                 {
                     question: "Au théâtre, comment appelle-t-on les paroles qu'un personnage se dit à lui-même ?",
                     answers: ["Monologue", "Dialogue", "Aparté", "Soliloque"],
                     correct: 0,
-                    explanation: "Le monologue est un discours d'un personnage seul sur scène.",
+                    explanation: "Le monologue est un discours d'un personnage seul sur scène qui exprime ses pensées.",
                     difficulty: "facile"
                 },
                 {
                     question: "Combien de syllabes compte un alexandrin ?",
                     answers: ["10", "12", "8", "14"],
                     correct: 1,
-                    explanation: "L'alexandrin est un vers de douze syllabes, très utilisé en poésie classique.",
+                    explanation: "L'alexandrin est un vers de douze syllabes, très utilisé en poésie classique française.",
                     difficulty: "facile"
                 },
                 {
                     question: "Dans un sonnet, combien y a-t-il de vers au total ?",
                     answers: ["12", "14", "16", "18"],
                     correct: 1,
-                    explanation: "Le sonnet comporte 14 vers : 2 quatrains et 2 tercets.",
+                    explanation: "Le sonnet comporte 14 vers organisés en 2 quatrains et 2 tercets.",
                     difficulty: "facile"
                 },
                 {
                     question: "Quelle est la fonction du mot souligné : 'Je donne ce livre à mon frère' ?",
                     answers: ["COD", "COI", "Complément du nom", "Attribut"],
                     correct: 1,
-                    explanation: "'À mon frère' est un complément d'objet indirect introduit par 'à'.",
+                    explanation: "'À mon frère' est un complément d'objet indirect introduit par la préposition 'à'.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Dans 'Il faut que tu viennes', quel est le mode du verbe 'viennes' ?",
                     answers: ["Indicatif", "Subjonctif", "Conditionnel", "Impératif"],
                     correct: 1,
-                    explanation: "Après 'il faut que', on utilise obligatoirement le subjonctif.",
+                    explanation: "Après 'il faut que', on utilise obligatoirement le subjonctif présent.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Accordez correctement : 'Les fleurs que j'ai...'",
                     answers: ["cueilli", "cueillie", "cueillies", "cueillis"],
                     correct: 2,
-                    explanation: "Le participe passé s'accorde avec le COD 'que' placé avant l'auxiliaire avoir.",
+                    explanation: "Le participe passé s'accorde avec le COD 'que' (= les fleurs) placé avant l'auxiliaire avoir.",
                     difficulty: "difficile"
                 },
                 {
                     question: "Dans 'Le vent souffle et murmure', quelle figure de style reconnaissez-vous ?",
                     answers: ["Métaphore", "Personnification", "Allitération", "Oxymore"],
                     correct: 1,
-                    explanation: "Le vent est doté de capacités humaines (murmurer), c'est une personnification.",
-                    difficulty: "moyen"
-                },
-                // Ajout de 90 autres questions de français...
-                {
-                    question: "L'anaphore consiste à :",
-                    answers: ["Répéter un mot en fin", "Répéter un mot en début", "Inverser l'ordre", "Supprimer des mots"],
-                    correct: 1,
-                    explanation: "L'anaphore répète un mot en début de phrases successives.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Dans 'Les Misérables', qui est le personnage principal ?",
-                    answers: ["Javert", "Jean Valjean", "Cosette", "Marius"],
-                    correct: 1,
-                    explanation: "Jean Valjean est le héros principal des Misérables de Victor Hugo.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Quel temps exprime une action antérieure à une autre action passée ?",
-                    answers: ["Imparfait", "Passé simple", "Plus-que-parfait", "Passé composé"],
-                    correct: 2,
-                    explanation: "Le plus-que-parfait exprime l'antériorité dans le passé.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Dans 'Roméo et Juliette', quel est le genre de cette œuvre ?",
-                    answers: ["Comédie", "Tragédie", "Drame", "Farce"],
-                    correct: 1,
-                    explanation: "Roméo et Juliette est une tragédie de Shakespeare.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Qu'est-ce qu'un oxymore ?",
-                    answers: ["Une répétition", "Une contradiction", "Une exagération", "Une comparaison"],
-                    correct: 1,
-                    explanation: "L'oxymore associe deux termes contradictoires.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Dans 'Je me souviens', quels sont les pronoms personnels ?",
-                    answers: ["Je", "me", "Les deux", "Aucun"],
-                    correct: 2,
-                    explanation: "'Je' et 'me' sont tous deux des pronoms personnels de la 1ère personne.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Quel est le féminin de 'acteur' ?",
-                    answers: ["Acteure", "Actrice", "Acteuresse", "Acteuse"],
-                    correct: 1,
-                    explanation: "Le féminin d'acteur est actrice.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Dans 'Bien qu'il soit tard', quelle est la nature de 'bien que' ?",
-                    answers: ["Conjonction de coordination", "Conjonction de subordination", "Préposition", "Adverbe"],
-                    correct: 1,
-                    explanation: "'Bien que' est une conjonction de subordination exprimant la concession.",
-                    difficulty: "difficile"
-                },
-                {
-                    question: "Quel registre de langue utilise 'bouquin' pour 'livre' ?",
-                    answers: ["Soutenu", "Courant", "Familier", "Vulgaire"],
-                    correct: 2,
-                    explanation: "'Bouquin' appartient au registre familier.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Dans 'Il pleut des cordes', quelle figure de style ?",
-                    answers: ["Métaphore", "Hyperbole", "Métonymie", "Expression figée"],
-                    correct: 3,
-                    explanation: "'Il pleut des cordes' est une expression figée.",
+                    explanation: "Le vent est doté de capacités humaines (murmurer), c'est donc une personnification.",
                     difficulty: "moyen"
                 }
-                // ... 80 autres questions de français
             ],
             
             maths: [
-                // 100 questions de mathématiques
                 {
                     question: "Résoudre l'équation : 3x + 5 = 14",
                     answers: ["x = 3", "x = 4", "x = 5", "x = 6"],
@@ -861,14 +790,14 @@
                     question: "Dans un triangle rectangle, si les côtés de l'angle droit mesurent 3 et 4, l'hypoténuse mesure :",
                     answers: ["5", "6", "7", "25"],
                     correct: 0,
-                    explanation: "D'après Pythagore : c² = 3² + 4² = 25, donc c = 5",
+                    explanation: "D'après le théorème de Pythagore : c² = 3² + 4² = 9 + 16 = 25, donc c = 5",
                     difficulty: "moyen"
                 },
                 {
                     question: "Dans la série : 2, 5, 7, 8, 10, la médiane est :",
                     answers: ["6", "7", "8", "6.4"],
                     correct: 1,
-                    explanation: "La médiane est la valeur centrale : 7 (3ème valeur sur 5)",
+                    explanation: "La médiane est la valeur centrale quand les données sont ordonnées : 7 (3ème valeur sur 5)",
                     difficulty: "moyen"
                 },
                 {
@@ -889,14 +818,14 @@
                     question: "On lance un dé équilibré. La probabilité d'obtenir un nombre pair est :",
                     answers: ["1/6", "1/3", "1/2", "2/3"],
                     correct: 2,
-                    explanation: "Nombres pairs : 2, 4, 6. Probabilité = 3/6 = 1/2",
+                    explanation: "Nombres pairs sur un dé : 2, 4, 6. Probabilité = 3/6 = 1/2",
                     difficulty: "facile"
                 },
                 {
                     question: "Factoriser : x² - 9",
                     answers: ["(x-3)²", "(x+3)²", "(x-3)(x+3)", "(x-9)(x+1)"],
                     correct: 2,
-                    explanation: "x² - 9 = x² - 3² = (x-3)(x+3) (identité remarquable)",
+                    explanation: "x² - 9 = x² - 3² = (x-3)(x+3) (identité remarquable a² - b²)",
                     difficulty: "moyen"
                 },
                 {
@@ -910,319 +839,229 @@
                     question: "Une fonction linéaire passe toujours par :",
                     answers: ["(0;1)", "(1;0)", "(0;0)", "(1;1)"],
                     correct: 2,
-                    explanation: "Une fonction linéaire f(x) = ax passe toujours par l'origine",
-                    difficulty: "facile"
-                },
-                // Ajout de 90 autres questions de maths...
-                {
-                    question: "Calculer : (-3)²",
-                    answers: ["-9", "9", "-6", "6"],
-                    correct: 1,
-                    explanation: "(-3)² = (-3) × (-3) = 9",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Le périmètre d'un cercle de rayon 4 cm est :",
-                    answers: ["8π cm", "16π cm", "4π cm", "12π cm"],
-                    correct: 0,
-                    explanation: "Périmètre = 2πr = 2π × 4 = 8π cm",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Résoudre : 2x - 7 = 3",
-                    answers: ["x = 5", "x = 2", "x = -2", "x = 10"],
-                    correct: 0,
-                    explanation: "2x = 3 + 7 = 10, donc x = 5",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Dans la série 1, 3, 5, 7, 9, la moyenne est :",
-                    answers: ["5", "6", "4", "7"],
-                    correct: 0,
-                    explanation: "Moyenne = (1+3+5+7+9)/5 = 25/5 = 5",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Calculer : 2³",
-                    answers: ["6", "8", "9", "12"],
-                    correct: 1,
-                    explanation: "2³ = 2 × 2 × 2 = 8",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Le volume d'un cube d'arête 3 cm est :",
-                    answers: ["9 cm³", "27 cm³", "18 cm³", "12 cm³"],
-                    correct: 1,
-                    explanation: "Volume = arête³ = 3³ = 27 cm³",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Simplifier : 3a + 5a - 2a",
-                    answers: ["6a", "10a", "8a", "5a"],
-                    correct: 0,
-                    explanation: "3a + 5a - 2a = (3 + 5 - 2)a = 6a",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Dans un triangle isocèle, combien d'angles sont égaux ?",
-                    answers: ["0", "2", "3", "1"],
-                    correct: 1,
-                    explanation: "Un triangle isocèle a deux angles égaux (angles à la base).",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Calculer : √16",
-                    answers: ["4", "8", "2", "6"],
-                    correct: 0,
-                    explanation: "√16 = 4 car 4² = 16",
-                    difficulty: "facile"
-                },
-                {
-                    question: "L'étendue de la série 3, 7, 12, 15, 20 est :",
-                    answers: ["17", "20", "11.4", "12"],
-                    correct: 0,
-                    explanation: "Étendue = valeur max - valeur min = 20 - 3 = 17",
+                    explanation: "Une fonction linéaire f(x) = ax passe toujours par l'origine (0;0)",
                     difficulty: "facile"
                 }
-                // ... 80 autres questions de maths
             ],
             
             histoire: [
-                // 100 questions d'histoire-géographie
                 {
                     question: "Quelle est la date de l'indépendance de l'Inde ?",
                     answers: ["1945", "1947", "1950", "1952"],
                     correct: 1,
-                    explanation: "L'Inde obtient son indépendance le 15 août 1947.",
+                    explanation: "L'Inde obtient son indépendance le 15 août 1947, avec partition entre Inde et Pakistan.",
                     difficulty: "facile"
                 },
                 {
                     question: "La Ve République est fondée en :",
                     answers: ["1956", "1958", "1960", "1962"],
                     correct: 1,
-                    explanation: "Constitution adoptée par référendum le 28 septembre 1958.",
+                    explanation: "La Constitution de la Ve République est adoptée par référendum le 28 septembre 1958.",
                     difficulty: "facile"
                 },
                 {
                     question: "La guerre froide commence vers :",
                     answers: ["1945", "1947", "1949", "1950"],
                     correct: 1,
-                    explanation: "1947 marque le début avec la doctrine Truman.",
+                    explanation: "1947 marque le début avec la doctrine Truman et le plan Marshall.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Les femmes obtiennent le droit de vote en France en :",
                     answers: ["1936", "1944", "1946", "1958"],
                     correct: 1,
-                    explanation: "Ordonnance du 21 avril 1944.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Le mur de Berlin est construit en :",
-                    answers: ["1959", "1961", "1963", "1965"],
-                    correct: 1,
-                    explanation: "Nuit du 12 au 13 août 1961.",
+                    explanation: "L'ordonnance du 21 avril 1944 accorde le droit de vote aux femmes françaises.",
                     difficulty: "facile"
                 },
                 {
                     question: "Une aire urbaine comprend :",
-                    answers: ["Ville-centre seulement", "Ville-centre + banlieue", "Ville-centre + banlieue + couronne périurbaine", "Toute la région"],
+                    answers: ["Seulement la ville-centre", "La ville-centre et sa banlieue", "La ville-centre, sa banlieue et sa couronne périurbaine", "Toute la région"],
                     correct: 2,
-                    explanation: "L'aire urbaine inclut le pôle urbain et la couronne périurbaine.",
+                    explanation: "L'aire urbaine inclut le pôle urbain (ville-centre + banlieue) et la couronne périurbaine.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Qui était le leader de l'indépendance indienne prônant la non-violence ?",
                     answers: ["Nehru", "Gandhi", "Jinnah", "Mountbatten"],
                     correct: 1,
-                    explanation: "Gandhi développe la philosophie de la non-violence.",
+                    explanation: "Gandhi développe la philosophie de la non-violence (ahimsa) pour lutter contre la domination britannique.",
                     difficulty: "facile"
                 },
                 {
                     question: "Le premier président de la Ve République est :",
                     answers: ["René Coty", "Charles de Gaulle", "Georges Pompidou", "Vincent Auriol"],
                     correct: 1,
-                    explanation: "Charles de Gaulle, élu en décembre 1958.",
+                    explanation: "Charles de Gaulle est élu premier président de la Ve République en décembre 1958.",
+                    difficulty: "facile"
+                },
+                {
+                    question: "Le mur de Berlin est construit en :",
+                    answers: ["1959", "1961", "1963", "1965"],
+                    correct: 1,
+                    explanation: "Le mur de Berlin est érigé dans la nuit du 12 au 13 août 1961.",
                     difficulty: "facile"
                 },
                 {
                     question: "La pilule contraceptive est autorisée en France en :",
                     answers: ["1965", "1967", "1970", "1975"],
                     correct: 1,
-                    explanation: "Loi Neuwirth du 28 décembre 1967.",
+                    explanation: "La loi Neuwirth autorise la contraception le 28 décembre 1967.",
                     difficulty: "moyen"
                 },
                 {
                     question: "L'Union européenne compte actuellement :",
                     answers: ["25 États", "27 États", "28 États", "30 États"],
                     correct: 1,
-                    explanation: "27 États membres depuis le Brexit (2020).",
+                    explanation: "Depuis le Brexit (2020), l'UE compte 27 États membres.",
                     difficulty: "facile"
                 }
-                // ... 90 autres questions d'histoire-géo
             ],
             
             sciences: [
-                // 100 questions de sciences (SVT)
                 {
                     question: "La fécondation a lieu dans :",
                     answers: ["L'ovaire", "L'utérus", "La trompe de Fallope", "Le vagin"],
                     correct: 2,
-                    explanation: "La fécondation se produit dans la trompe de Fallope.",
+                    explanation: "La fécondation se produit dans la trompe de Fallope, aussi appelée trompe utérine.",
                     difficulty: "facile"
                 },
                 {
                     question: "Un chromosome contient :",
                     answers: ["De l'ARN", "De l'ADN", "Des protéines", "Des lipides"],
                     correct: 1,
-                    explanation: "Les chromosomes sont constitués d'ADN et de protéines.",
+                    explanation: "Les chromosomes sont constitués d'ADN (acide désoxyribonucléique) et de protéines.",
                     difficulty: "facile"
                 },
                 {
                     question: "L'être humain possède :",
                     answers: ["23 chromosomes", "46 chromosomes", "48 chromosomes", "44 chromosomes"],
                     correct: 1,
-                    explanation: "46 chromosomes (23 paires) dans chaque cellule.",
+                    explanation: "L'être humain possède 46 chromosomes (23 paires) dans chaque cellule.",
                     difficulty: "facile"
                 },
                 {
                     question: "La dérive des continents est proposée par :",
                     answers: ["Darwin", "Wegener", "Mendel", "Pasteur"],
                     correct: 1,
-                    explanation: "Alfred Wegener en 1912.",
+                    explanation: "Alfred Wegener propose la théorie de la dérive des continents en 1912.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Le neurone est :",
                     answers: ["Une cellule musculaire", "Une cellule nerveuse", "Une cellule sanguine", "Une cellule osseuse"],
                     correct: 1,
-                    explanation: "Cellule de base du système nerveux.",
+                    explanation: "Le neurone est la cellule de base du système nerveux qui transmet l'information.",
                     difficulty: "facile"
                 },
                 {
                     question: "Les anticorps sont produits par :",
                     answers: ["Les globules rouges", "Les lymphocytes B", "Les lymphocytes T", "Les plaquettes"],
                     correct: 1,
-                    explanation: "Les lymphocytes B produisent les anticorps.",
+                    explanation: "Les lymphocytes B se transforment en plasmocytes qui produisent les anticorps.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Les gamètes contiennent :",
                     answers: ["23 chromosomes", "46 chromosomes", "22 chromosomes", "24 chromosomes"],
                     correct: 0,
-                    explanation: "Les gamètes sont haploïdes (23 chromosomes).",
+                    explanation: "Les gamètes (spermatozoïdes et ovules) contiennent 23 chromosomes (haploïdes).",
                     difficulty: "moyen"
                 },
                 {
-                    question: "La vitesse des plaques tectoniques est de :",
-                    answers: ["Quelques mm/an", "Quelques cm/an", "Quelques m/an", "Quelques km/an"],
+                    question: "Les plaques tectoniques se déplacent à une vitesse de :",
+                    answers: ["Quelques mm par an", "Quelques cm par an", "Quelques m par an", "Quelques km par an"],
                     correct: 1,
-                    explanation: "Les plaques se déplacent de quelques cm par an.",
+                    explanation: "Les plaques tectoniques se déplacent de quelques centimètres par an.",
                     difficulty: "moyen"
                 },
                 {
                     question: "Un réflexe est :",
                     answers: ["Une réponse volontaire", "Une réponse automatique", "Une réponse lente", "Une réponse consciente"],
                     correct: 1,
-                    explanation: "Le réflexe est automatique et involontaire.",
+                    explanation: "Le réflexe est une réponse automatique et involontaire à un stimulus.",
                     difficulty: "facile"
                 },
                 {
                     question: "La vaccination consiste à :",
                     answers: ["Injecter des anticorps", "Stimuler la production d'anticorps", "Détruire les virus", "Renforcer les muscles"],
                     correct: 1,
-                    explanation: "La vaccination stimule le système immunitaire.",
+                    explanation: "La vaccination stimule le système immunitaire pour qu'il produise ses propres anticorps.",
                     difficulty: "moyen"
                 }
-                // ... 90 autres questions de sciences
             ],
             
             physique: [
-                // 100 questions de physique-chimie
                 {
                     question: "Un atome est constitué :",
                     answers: ["Seulement de protons", "D'un noyau et d'électrons", "Seulement d'électrons", "De molécules"],
                     correct: 1,
-                    explanation: "Noyau (protons + neutrons) et électrons.",
+                    explanation: "L'atome comprend un noyau (protons + neutrons) et des électrons qui gravitent autour.",
                     difficulty: "facile"
                 },
                 {
                     question: "La vitesse se calcule par :",
                     answers: ["v = d × t", "v = d / t", "v = t / d", "v = d + t"],
                     correct: 1,
-                    explanation: "Vitesse = distance / temps",
+                    explanation: "La vitesse est égale à la distance parcourue divisée par le temps : v = d/t.",
                     difficulty: "facile"
                 },
                 {
                     question: "Dans un circuit en série, l'intensité :",
                     answers: ["Varie", "Est la même partout", "Diminue", "Augmente"],
                     correct: 1,
-                    explanation: "L'intensité est identique en tous points.",
+                    explanation: "Dans un circuit en série, l'intensité est identique en tous points du circuit.",
                     difficulty: "facile"
                 },
                 {
                     question: "La charge d'un proton est :",
                     answers: ["Positive", "Négative", "Neutre", "Variable"],
                     correct: 0,
-                    explanation: "Le proton porte une charge positive.",
+                    explanation: "Le proton porte une charge électrique positive (+e).",
                     difficulty: "facile"
                 },
                 {
                     question: "La formule chimique de l'eau est :",
                     answers: ["H₂O", "HO₂", "H₃O", "H₂O₂"],
                     correct: 0,
-                    explanation: "2 atomes d'hydrogène et 1 atome d'oxygène.",
+                    explanation: "L'eau est constituée de 2 atomes d'hydrogène et 1 atome d'oxygène : H₂O.",
                     difficulty: "facile"
                 },
                 {
-                    question: "Le poids dépend :",
-                    answers: ["De la masse seulement", "De la gravité seulement", "De la masse et de la gravité", "De la taille"],
+                    question: "Le poids d'un objet dépend :",
+                    answers: ["De sa masse seulement", "De la gravité seulement", "De sa masse et de la gravité", "De sa taille"],
                     correct: 2,
-                    explanation: "Poids = masse × gravité",
+                    explanation: "Le poids P = m × g dépend de la masse et de l'intensité de pesanteur.",
                     difficulty: "moyen"
                 },
                 {
                     question: "La loi d'Ohm s'écrit :",
                     answers: ["U = R × I", "I = U × R", "R = U × I", "U = I / R"],
                     correct: 0,
-                    explanation: "Tension = Résistance × Intensité",
+                    explanation: "La loi d'Ohm : U = R × I (tension = résistance × intensité).",
                     difficulty: "moyen"
                 },
                 {
                     question: "Le son se propage :",
                     answers: ["Dans le vide", "Seulement dans l'air", "Dans la matière", "Partout"],
                     correct: 2,
-                    explanation: "Le son a besoin d'un milieu matériel.",
+                    explanation: "Le son a besoin d'un milieu matériel pour se propager (solide, liquide, gaz).",
                     difficulty: "facile"
                 },
                 {
                     question: "Une solution de pH = 3 est :",
                     answers: ["Basique", "Neutre", "Acide", "Indéterminée"],
                     correct: 2,
-                    explanation: "pH < 7 = solution acide",
+                    explanation: "Un pH inférieur à 7 indique une solution acide.",
                     difficulty: "facile"
                 },
                 {
                     question: "L'énergie cinétique dépend :",
                     answers: ["De la masse seulement", "De la vitesse seulement", "De la masse et de la vitesse", "De la hauteur"],
                     correct: 2,
-                    explanation: "Ec = ½mv² (masse et vitesse)",
+                    explanation: "L'énergie cinétique Ec = ½mv² dépend de la masse et de la vitesse.",
                     difficulty: "difficile"
                 }
-                // ... 90 autres questions de physique-chimie
             ]
-        };
-
-        // Configuration globale
-        const CONFIG = {
-            questionsPerQuiz: 20,
-            subjects: {
-                francais: 'Français',
-                maths: 'Mathématiques',
-                histoire: 'Histoire-Géographie',
-                sciences: 'Sciences (SVT)',
-                physique: 'Physique-Chimie'
-            }
         };
 
         // Variables globales
@@ -1233,12 +1072,22 @@
         let selectedAnswer = null;
         let userStats = loadStats();
 
+        // Configuration
+        const CONFIG = {
+            questionsPerQuiz: 10,
+            subjects: {
+                francais: 'Français',
+                maths: 'Mathématiques',
+                histoire: 'Histoire-Géographie',
+                sciences: 'Sciences (SVT)',
+                physique: 'Physique-Chimie'
+            }
+        };
+
         // Démarrer un quiz
         function startQuiz(subject) {
-            console.log('Démarrage du quiz:', subject);
-            
             currentSubject = subject;
-            currentQuestions = shuffleArray([...questionsDatabase[subject]]).slice(0, CONFIG.questionsPerQuiz);
+            currentQuestions = shuffleArray([...questionsDatabase[subject]]);
             currentQuestionIndex = 0;
             score = 0;
             selectedAnswer = null;
@@ -1404,6 +1253,9 @@
 
             document.getElementById('explanation').appendChild(finalScoreDiv);
             document.getElementById('finish-btn').style.display = 'none';
+            
+            // Mise à jour des statistiques globales
+            updateUI();
         }
 
         function backToMenu() {
@@ -1434,3 +1286,85 @@
             const defaultStats = {};
             Object.keys(CONFIG.subjects).forEach(subject => {
                 defaultStats[subject] = { correct: 0, incorrect: 0 };
+            });
+
+            const saved = localStorage.getItem('brevetQuizStats2025');
+            return saved ? { ...defaultStats, ...JSON.parse(saved) } : defaultStats;
+        }
+
+        function saveStats() {
+            localStorage.setItem('brevetQuizStats2025', JSON.stringify(userStats));
+        }
+
+        function updateUI() {
+            updateGlobalStats();
+            updateSubjectStats();
+        }
+
+        function updateGlobalStats() {
+            const totalCorrect = Object.values(userStats).reduce((sum, stat) => sum + stat.correct, 0);
+            const totalAnswered = Object.values(userStats).reduce((sum, stat) => sum + stat.correct + stat.incorrect, 0);
+            const globalPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+
+            document.getElementById('global-score').textContent = `${globalPercentage}%`;
+            
+            // Mise à jour du niveau
+            const level = calculateLevel(totalCorrect);
+            document.getElementById('user-level').textContent = level;
+            
+            // Mise à jour de la série (simulation)
+            const streak = calculateStreak();
+            document.getElementById('streak').textContent = streak;
+        }
+
+        function updateSubjectStats() {
+            Object.keys(CONFIG.subjects).forEach(subject => {
+                const stats = userStats[subject];
+                const total = stats.correct + stats.incorrect;
+                const percentage = total > 0 ? Math.round((stats.correct / total) * 100) : 0;
+                
+                // Mise à jour des scores
+                const scoreEl = document.getElementById(`${subject}-score`);
+                const doneEl = document.getElementById(`${subject}-done`);
+                const progressEl = document.getElementById(`${subject}-progress`);
+                
+                if (scoreEl) scoreEl.textContent = `${percentage}%`;
+                if (doneEl) doneEl.textContent = total;
+                if (progressEl) {
+                    const progressPercentage = questionsDatabase[subject] ? 
+                        Math.round((total / questionsDatabase[subject].length) * 100) : 0;
+                    progressEl.style.width = `${progressPercentage}%`;
+                }
+            });
+        }
+
+        function calculateLevel(totalCorrect) {
+            if (totalCorrect < 10) return 'Débutant';
+            if (totalCorrect < 25) return 'Apprenti';
+            if (totalCorrect < 40) return 'Confirmé';
+            if (totalCorrect < 50) return 'Expert';
+            return 'Maître';
+        }
+
+        function calculateStreak() {
+            // Simulation d'une série basée sur l'activité récente
+            const today = new Date().toDateString();
+            const lastActivity = localStorage.getItem('lastActivity');
+            
+            if (lastActivity === today) {
+                return parseInt(localStorage.getItem('currentStreak') || '1');
+            } else {
+                localStorage.setItem('lastActivity', today);
+                localStorage.setItem('currentStreak', '1');
+                return 1;
+            }
+        }
+
+        // Initialisation de l'application
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUI();
+            console.log('Quiz Brevet 2025 - Manon révise - Chargé avec succès !');
+        });
+    </script>
+</body>
+</html>
