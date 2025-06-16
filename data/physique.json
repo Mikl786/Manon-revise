@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Un atome est constitué :",
+    "answers": ["Seulement de protons", "D'un noyau et d'électrons", "Seulement d'électrons", "De molécules"],
+    "correct": 1,
+    "explanation": "L'atome comprend un noyau (protons + neutrons) et des électrons qui gravitent autour.",
+    "difficulty": "facile",
+    "theme": "structure_matiere"
+  },
+  {
+    "id": 2,
+    "question": "La vitesse se calcule par :",
+    "answers": ["v = d × t", "v = d / t", "v = t / d", "v = d + t"],
+    "correct": 1,
+    "explanation": "La vitesse est égale à la distance parcourue divisée par le temps : v = d/t.",
+    "difficulty": "facile",
+    "theme": "mecanique"
+  },
+  {
+    "id": 3,
+    "question": "Dans un circuit en série, l'intensité :",
+    "answers": ["Varie", "Est la même partout", "Diminue", "Augmente"],
+    "correct": 1,
+    "explanation": "Dans un circuit en série, l'intensité est identique en tous points du circuit.",
+    "difficulty": "facile",
+    "theme": "electricite"
+  },
+  {
+    "id": 4,
+    "question": "La vitesse de la lumière dans le vide est :",
+    "answers": ["300 000 km/s", "3 × 10⁸ m/s", "Les deux réponses", "Aucune des deux"],
+    "correct": 2,
+    "explanation": "La vitesse de la lumière c = 3 × 10⁸ m/s = 300 000 km/s.",
+    "difficulty": "facile",
+    "theme": "ondes"
+  },
+  {
+    "id": 5,
+    "question": "La charge d'un proton est :",
+    "answers": ["Positive", "Négative", "Neutre", "Variable"],
+    "correct": 0,
+    "explanation": "Le proton porte une charge électrique positive (+e).",
+    "difficulty": "facile",
+    "theme": "structure_matiere"
+  },
+  {
+    "id": 6,
+    "question": "Le poids d'un objet dépend :",
+    "answers": ["De sa masse seulement", "De la gravité seulement", "De sa masse et de la gravité", "De sa taille"],
+    "correct": 2,
+    "explanation": "Le poids P = m × g dépend de la masse et de l'intensité de pesanteur.",
+    "difficulty": "moyen",
+    "theme": "mecanique"
+  },
+  {
+    "id": 7,
+    "question": "La loi d'Ohm s'écrit :",
+    "answers": ["U = R × I", "I = U × R", "R = U × I", "U = I / R"],
+    "correct": 0,
+    "explanation": "La loi d'Ohm : U = R × I (tension = résistance × intensité).",
+    "difficulty": "moyen",
+    "theme": "electricite"
+  },
+  {
+    "id": 8,
+    "question": "Le son se propage :",
+    "answers": ["Dans le vide", "Seulement dans l'air", "Dans la matière", "Partout"],
+    "correct": 2,
+    "explanation": "Le son a besoin d'un milieu matériel pour se propager (solide, liquide, gaz).",
+    "difficulty": "facile",
+    "theme": "ondes"
+  },
+  {
+    "id": 9,
+    "question": "La formule chimique de l'eau est :",
+    "answers": ["H₂O", "HO₂", "H₃O", "H₂O₂"],
+    "correct": 0,
+    "explanation": "L'eau est constituée de 2 atomes d'hydrogène et 1 atome d'oxygène : H₂O.",
+    "difficulty": "facile",
+    "theme": "chimie"
+  },
+  {
+    "id": 10,
+    "question": "Sur Terre, g vaut environ :",
+    "answers": ["9,8 m/s²", "10 m/s²", "9,8 N/kg", "Toutes ces réponses"],
+    "correct": 3,
+    "explanation": "L'intensité de pesanteur terrestre vaut 9,8 m/s² ou 9,8 N/kg.",
+    "difficulty": "moyen",
+    "theme": "mecanique"
+  },
+  {
+    "id": 11,
+    "question": "La puissance électrique se calcule par :",
+    "answers": ["P = U / I", "P = U × I", "P = U - I", "P = U + I"],
+    "correct": 1,
+    "explanation": "La puissance électrique P = U × I (tension × intensité).",
+    "difficulty": "moyen",
+    "theme": "electricite"
+  },
+  {
+    "id": 12,
+    "question": "La fréquence d'un son grave est :",
+    "answers": ["Élevée", "Faible", "Moyenne", "Variable"],
+    "correct": 1,
+    "explanation": "Un son grave correspond à une fréquence faible (basses fréquences).",
+    "difficulty": "facile",
+    "theme": "ondes"
+  },
+  {
+    "id": 13,
+    "question": "Dans l'équation H₂ + Cl₂ → 2HCl, les réactifs sont :",
+    "answers": ["H₂ et HCl", "Cl₂ et HCl", "H₂ et Cl₂", "Seulement HCl"],
+    "correct": 2,
+    "explanation": "Les réactifs sont les substances de départ : H₂ et Cl₂.",
+    "difficulty": "facile",
+    "theme": "chimie"
+  },
+  {
+    "id": 14,
+    "question": "Une force se mesure en :",
+    "answers": ["Joules", "Watts", "Newtons", "Pascals"],
+    "correct": 2,
+    "explanation": "L'unité de force dans le système international est le Newton (N).",
+    "difficulty": "facile",
+    "theme": "mecanique"
+  },
+  {
+    "id": 15,
+    "question": "L'unité de l'énergie électrique est :",
+    "answers": ["Le Watt", "Le Joule", "Le Volt", "L'Ampère"],
+    "correct": 1,
+    "explanation": "L'énergie se mesure en Joules (J) ou en kilowattheures (kWh) pour l'électricité.",
+    "difficulty": "moyen",
+    "theme": "electricite"
+  },
+  {
+    "id": 16,
+    "question": "L'échographie utilise :",
+    "answers": ["La lumière", "Les ultrasons", "Les rayons X", "Les ondes radio"],
+    "correct": 1,
+    "explanation": "L'échographie utilise des ultrasons (sons de très haute fréquence).",
+    "difficulty": "moyen",
+    "theme": "ondes"
+  },
+  {
+    "id": 17,
+    "question": "Une solution de pH = 3 est :",
+    "answers": ["Basique", "Neutre", "Acide", "Indéterminée"],
+    "correct": 2,
+    "explanation": "Un pH inférieur à 7 indique une solution acide.",
+    "difficulty": "facile",
+    "theme": "chimie"
+  },
+  {
+    "id": 18,
+    "question": "L'énergie cinétique dépend :",
+    "answers": ["De la masse seulement", "De la vitesse seulement", "De la masse et de la vitesse", "De la hauteur"],
+    "correct": 2,
+    "explanation": "L'énergie cinétique Ec = ½mv² dépend de la masse et de la vitesse.",
+    "difficulty": "difficile",
+    "theme": "mecanique"
+  },
+  {
+    "id": 19,
+    "question": "Un court-circuit se produit quand :",
+    "answers": ["La résistance est très grande", "La résistance est très faible", "Il n'y a pas de courant", "La tension est nulle"],
+    "correct": 1,
+    "explanation": "Un court-circuit correspond à une résistance très faible, provoquant un courant intense.",
+    "difficulty": "moyen",
+    "theme": "electricite"
+  },
+  {
+    "id": 20,
+    "question": "La distance d = v × t permet de calculer :",
+    "answers": ["La vitesse du son", "La distance avec un sonar", "Le temps de propagation", "Toutes ces réponses"],
+    "correct": 3,
+    "explanation": "Cette formule permet tous ces calculs selon les données connues.",
+    "difficulty": "moyen",
+    "theme": "ondes"
+  }
+]
