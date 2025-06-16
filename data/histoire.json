@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Quelle est la date de l'indépendance de l'Inde ?",
+    "answers": ["1945", "1947", "1950", "1952"],
+    "correct": 1,
+    "explanation": "L'Inde obtient son indépendance le 15 août 1947, avec partition entre Inde et Pakistan.",
+    "difficulty": "facile",
+    "theme": "decolonisation"
+  },
+  {
+    "id": 2,
+    "question": "La Ve République est fondée en :",
+    "answers": ["1956", "1958", "1960", "1962"],
+    "correct": 1,
+    "explanation": "La Constitution de la Ve République est adoptée par référendum le 28 septembre 1958.",
+    "difficulty": "facile",
+    "theme": "ve_republique"
+  },
+  {
+    "id": 3,
+    "question": "La guerre froide commence vers :",
+    "answers": ["1945", "1947", "1949", "1950"],
+    "correct": 1,
+    "explanation": "1947 marque le début avec la doctrine Truman et le plan Marshall.",
+    "difficulty": "moyen",
+    "theme": "guerre_froide"
+  },
+  {
+    "id": 4,
+    "question": "Les femmes obtiennent le droit de vote en France en :",
+    "answers": ["1936", "1944", "1946", "1958"],
+    "correct": 1,
+    "explanation": "L'ordonnance du 21 avril 1944 accorde le droit de vote aux femmes françaises.",
+    "difficulty": "facile",
+    "theme": "societe_francaise"
+  },
+  {
+    "id": 5,
+    "question": "Une aire urbaine comprend :",
+    "answers": ["Seulement la ville-centre", "La ville-centre et sa banlieue", "La ville-centre, sa banlieue et sa couronne périurbaine", "Toute la région"],
+    "correct": 2,
+    "explanation": "L'aire urbaine inclut le pôle urbain (ville-centre + banlieue) et la couronne périurbaine.",
+    "difficulty": "moyen",
+    "theme": "geographie_urbaine"
+  },
+  {
+    "id": 6,
+    "question": "Qui était le leader de l'indépendance indienne prônant la non-violence ?",
+    "answers": ["Nehru", "Gandhi", "Jinnah", "Mountbatten"],
+    "correct": 1,
+    "explanation": "Gandhi développe la philosophie de la non-violence (ahimsa) pour lutter contre la domination britannique.",
+    "difficulty": "facile",
+    "theme": "decolonisation"
+  },
+  {
+    "id": 7,
+    "question": "Le premier président de la Ve République est :",
+    "answers": ["René Coty", "Charles de Gaulle", "Georges Pompidou", "Vincent Auriol"],
+    "correct": 1,
+    "explanation": "Charles de Gaulle est élu premier président de la Ve République en décembre 1958.",
+    "difficulty": "facile",
+    "theme": "ve_republique"
+  },
+  {
+    "id": 8,
+    "question": "Le mur de Berlin est construit en :",
+    "answers": ["1959", "1961", "1963", "1965"],
+    "correct": 1,
+    "explanation": "Le mur de Berlin est érigé dans la nuit du 12 au 13 août 1961.",
+    "difficulty": "facile",
+    "theme": "guerre_froide"
+  },
+  {
+    "id": 9,
+    "question": "La pilule contraceptive est autorisée en France en :",
+    "answers": ["1965", "1967", "1970", "1975"],
+    "correct": 1,
+    "explanation": "La loi Neuwirth autorise la contraception le 28 décembre 1967.",
+    "difficulty": "moyen",
+    "theme": "societe_francaise"
+  },
+  {
+    "id": 10,
+    "question": "Le phénomène de métropolisation désigne :",
+    "answers": ["La croissance démographique", "La concentration des activités dans les grandes villes", "L'étalement urbain", "La désindustrialisation"],
+    "correct": 1,
+    "explanation": "La métropolisation concentre population, activités et pouvoirs dans les métropoles.",
+    "difficulty": "moyen",
+    "theme": "geographie_urbaine"
+  },
+  {
+    "id": 11,
+    "question": "La conférence de Bandung (1955) réunit :",
+    "answers": ["Les pays européens", "Les pays du tiers-monde", "Les pays communistes", "Les pays de l'OTAN"],
+    "correct": 1,
+    "explanation": "Bandung réunit 29 pays afro-asiatiques pour affirmer leur non-alignement dans la guerre froide.",
+    "difficulty": "difficile",
+    "theme": "decolonisation"
+  },
+  {
+    "id": 12,
+    "question": "L'élection du président au suffrage universel direct date de :",
+    "answers": ["1958", "1962", "1965", "1969"],
+    "correct": 1,
+    "explanation": "Le référendum du 28 octobre 1962 instaure l'élection présidentielle au suffrage universel direct.",
+    "difficulty": "moyen",
+    "theme": "ve_republique"
+  },
+  {
+    "id": 13,
+    "question": "La crise de Cuba a lieu en :",
+    "answers": ["1960", "1961", "1962", "1963"],
+    "correct": 2,
+    "explanation": "La crise des missiles de Cuba oppose USA et URSS en octobre 1962.",
+    "difficulty": "moyen",
+    "theme": "guerre_froide"
+  },
+  {
+    "id": 14,
+    "question": "L'IVG est légalisée par la loi :",
+    "answers": ["Neuwirth", "Veil", "Roudy", "Aubry"],
+    "correct": 1,
+    "explanation": "La loi Veil légalise l'interruption volontaire de grossesse le 17 janvier 1975.",
+    "difficulty": "moyen",
+    "theme": "societe_francaise"
+  },
+  {
+    "id": 15,
+    "question": "Un technopôle est :",
+    "answers": ["Une zone industrielle", "Un espace de haute technologie", "Un centre commercial", "Un port"],
+    "correct": 1,
+    "explanation": "Un technopôle concentre entreprises de haute technologie, recherche et formation.",
+    "difficulty": "moyen",
+    "theme": "geographie_economique"
+  },
+  {
+    "id": 16,
+    "question": "L'expression 'tiers-monde' est créée par :",
+    "answers": ["De Gaulle", "Nehru", "Alfred Sauvy", "Nasser"],
+    "correct": 2,
+    "explanation": "Alfred Sauvy forge ce terme en 1952 par analogie avec le tiers état de 1789.",
+    "difficulty": "difficile",
+    "theme": "decolonisation"
+  },
+  {
+    "id": 17,
+    "question": "Mai 68 se caractérise par :",
+    "answers": ["Une crise économique", "Des manifestations étudiantes et ouvrières", "Une guerre", "Une révolution"],
+    "correct": 1,
+    "explanation": "Mai 68 combine contestation étudiante et grève générale ouvrière dans un mouvement social majeur.",
+    "difficulty": "moyen",
+    "theme": "ve_republique"
+  },
+  {
+    "id": 18,
+    "question": "L'OTAN est créée en :",
+    "answers": ["1947", "1949", "1951", "1955"],
+    "correct": 1,
+    "explanation": "L'Organisation du traité de l'Atlantique Nord est signée le 4 avril 1949.",
+    "difficulty": "moyen",
+    "theme": "guerre_froide"
+  },
+  {
+    "id": 19,
+    "question": "Les Trente Glorieuses correspondent à la période :",
+    "answers": ["1945-1975", "1950-1980", "1940-1970", "1955-1985"],
+    "correct": 0,
+    "explanation": "Jean Fourastié désigne ainsi la période de forte croissance de 1945 à 1975.",
+    "difficulty": "facile",
+    "theme": "societe_francaise"
+  },
+  {
+    "id": 20,
+    "question": "L'Union européenne compte actuellement :",
+    "answers": ["25 États", "27 États", "28 États", "30 États"],
+    "correct": 1,
+    "explanation": "Depuis le Brexit (2020), l'UE compte 27 États membres.",
+    "difficulty": "facile",
+    "theme": "union_europeenne"
+  }
+]
