@@ -1,4 +1,4 @@
-// Application Quiz complète
+// Application Quiz corrigée
 class QuizApp {
     constructor() {
         this.currentSubject = 'francais';
@@ -28,6 +28,7 @@ class QuizApp {
     }
 
     setupEventListeners() {
+        // Boutons de matières
         document.querySelectorAll('.subject-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const subject = e.target.dataset.subject;
@@ -35,16 +36,48 @@ class QuizApp {
             });
         });
 
-        this.validateBtn.addEventListener('click', () => this.validateAnswer());
-        this.nextBtn.addEventListener('click', () => this.nextQuestion());
-        this.restartBtn.addEventListener('click', () => this.restartQuiz());
+        // Boutons de cartes de matières
+        document.querySelectorAll('.start-quiz-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const card = e.target.closest('.subject-card');
+                if (card) {
+                    const subject = card.dataset.subject;
+                    this.loadSubject(subject);
+                }
+            });
+        });
+
+        // Boutons de quiz
+        if (this.validateBtn) {
+            this.validateBtn.addEventListener('click', () => this.validateAnswer());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextQuestion());
+        }
+        if (this.restartBtn) {
+            this.restartBtn.addEventListener('click', () => this.restartQuiz());
+        }
     }
 
     loadSubject(subject) {
+        console.log('Chargement de la matière:', subject);
+        
+        // Vérifier si la matière existe
+        if (!questionsDatabase[subject]) {
+            console.error('Matière non trouvée:', subject);
+            return;
+        }
+
+        // Mettre à jour l'interface
         document.querySelectorAll('.subject-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        document.querySelector(`[data-subject="${subject}"]`).classList.add('active');
+        
+        const activeBtn = document.querySelector(`[data-subject="${subject}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
 
         this.currentSubject = subject;
         this.currentQuestions = this.shuffleArray([...questionsDatabase[subject]]);
@@ -62,35 +95,54 @@ class QuizApp {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-        return shuffled.slice(0, 50); // 50 questions par session
+        return shuffled.slice(0, 20); // 20 questions par session
     }
 
     displayQuestion() {
+        if (!this.currentQuestions || this.currentQuestions.length === 0) {
+            console.error('Aucune question disponible');
+            return;
+        }
+
         const question = this.currentQuestions[this.currentQuestionIndex];
         
-        this.questionNumberEl.textContent = `Question ${this.currentQuestionIndex + 1}/${this.currentQuestions.length}`;
-        this.questionTextEl.textContent = question.question;
+        if (this.questionNumberEl) {
+            this.questionNumberEl.textContent = `Question ${this.currentQuestionIndex + 1}/${this.currentQuestions.length}`;
+        }
         
-        this.answersEl.innerHTML = '';
-        question.answers.forEach((answer, index) => {
-            const answerEl = document.createElement('div');
-            answerEl.className = 'answer-option';
-            answerEl.textContent = answer;
-            answerEl.style.pointerEvents = 'auto';
-            answerEl.addEventListener('click', () => this.selectAnswer(index));
-            this.answersEl.appendChild(answerEl);
-        });
+        if (this.questionTextEl) {
+            this.questionTextEl.textContent = question.question;
+        }
+        
+        if (this.answersEl) {
+            this.answersEl.innerHTML = '';
+            question.answers.forEach((answer, index) => {
+                const answerEl = document.createElement('div');
+                answerEl.className = 'answer-option';
+                answerEl.textContent = answer;
+                answerEl.style.pointerEvents = 'auto';
+                answerEl.addEventListener('click', () => this.selectAnswer(index));
+                this.answersEl.appendChild(answerEl);
+            });
+        }
 
-        this.validateBtn.disabled = true;
-        this.validateBtn.style.display = 'inline-block';
-        this.nextBtn.style.display = 'none';
-        this.restartBtn.style.display = 'none';
-        this.explanationEl.style.display = 'none';
+        // Réinitialiser les boutons
+        if (this.validateBtn) {
+            this.validateBtn.disabled = true;
+            this.validateBtn.style.display = 'inline-block';
+        }
+        if (this.nextBtn) {
+            this.nextBtn.style.display = 'none';
+        }
+        if (this.restartBtn) {
+            this.restartBtn.style.display = 'none';
+        }
+        if (this.explanationEl) {
+            this.explanationEl.style.display = 'none';
+        }
+        
         this.selectedAnswer = null;
-
-        const progress = ((this.currentQuestionIndex) / this.currentQuestions.length) * 100;
-        this.progressEl.style.width = `${progress}%`;
-
+        this.updateProgress();
         this.updateScore();
     }
 
@@ -101,7 +153,10 @@ class QuizApp {
 
         document.querySelectorAll('.answer-option')[index].classList.add('selected');
         this.selectedAnswer = index;
-        this.validateBtn.disabled = false;
+        
+        if (this.validateBtn) {
+            this.validateBtn.disabled = false;
+        }
     }
 
     validateAnswer() {
@@ -126,15 +181,23 @@ class QuizApp {
             this.userStats[this.currentSubject].incorrect++;
         }
 
-        this.explanationEl.innerHTML = `<strong>Explication :</strong> ${question.explanation}`;
-        this.explanationEl.style.display = 'block';
+        if (this.explanationEl) {
+            this.explanationEl.innerHTML = `<strong>💡 Explication :</strong> ${question.explanation}`;
+            this.explanationEl.style.display = 'block';
+        }
 
-        this.validateBtn.style.display = 'none';
+        if (this.validateBtn) {
+            this.validateBtn.style.display = 'none';
+        }
         
         if (this.currentQuestionIndex < this.currentQuestions.length - 1) {
-            this.nextBtn.style.display = 'inline-block';
+            if (this.nextBtn) {
+                this.nextBtn.style.display = 'inline-block';
+            }
         } else {
-            this.restartBtn.style.display = 'inline-block';
+            if (this.restartBtn) {
+                this.restartBtn.style.display = 'inline-block';
+            }
             this.showFinalScore();
         }
 
@@ -152,11 +215,24 @@ class QuizApp {
         this.loadSubject(this.currentSubject);
     }
 
+    updateProgress() {
+        if (this.progressEl) {
+            const progress = ((this.currentQuestionIndex) / this.currentQuestions.length) * 100;
+            this.progressEl.style.width = `${progress}%`;
+        }
+    }
+
     updateScore() {
         const totalAnswered = this.currentQuestionIndex + (this.selectedAnswer !== null ? 1 : 0);
-        this.scoreEl.textContent = `Score: ${this.score}/${totalAnswered}`;
-        const percentage = totalAnswered > 0 ? Math.round((this.score / totalAnswered) * 100) : 0;
-        this.percentageEl.textContent = `${percentage}%`;
+        
+        if (this.scoreEl) {
+            this.scoreEl.textContent = `Score: ${this.score}/${totalAnswered}`;
+        }
+        
+        if (this.percentageEl) {
+            const percentage = totalAnswered > 0 ? Math.round((this.score / totalAnswered) * 100) : 0;
+            this.percentageEl.textContent = `${percentage}%`;
+        }
     }
 
     showFinalScore() {
@@ -183,16 +259,20 @@ class QuizApp {
             <p>${message}</p>
         `;
 
-        this.explanationEl.appendChild(finalScoreEl);
+        if (this.explanationEl) {
+            this.explanationEl.appendChild(finalScoreEl);
+        }
     }
 
     updateStats() {
+        if (!this.statsEl) return;
+
         const subjects = {
-            francais: 'Français (200 questions)',
-            maths: 'Mathématiques (200 questions)',
-            histoire: 'Histoire-Géo (200 questions)',
-            sciences: 'Sciences SVT (200 questions)',
-            physique: 'Physique-Chimie (200 questions)'
+            francais: 'Français',
+            maths: 'Mathématiques',
+            histoire: 'Histoire-Géo',
+            sciences: 'Sciences (SVT)',
+            physique: 'Physique-Chimie'
         };
 
         this.statsEl.innerHTML = '';
@@ -210,21 +290,6 @@ class QuizApp {
             `;
             this.statsEl.appendChild(statEl);
         });
-
-        // Statistiques globales
-        const totalCorrect = Object.values(this.userStats).reduce((sum, stat) => sum + stat.correct, 0);
-        const totalAnswered = Object.values(this.userStats).reduce((sum, stat) => sum + stat.correct + stat.incorrect, 0);
-        const globalPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-
-        const globalStatEl = document.createElement('div');
-        globalStatEl.className = 'stat-item';
-        globalStatEl.style.borderTop = '2px solid #667eea';
-        globalStatEl.style.fontWeight = 'bold';
-        globalStatEl.innerHTML = `
-            <span>📊 Total Global</span>
-            <span>${totalCorrect}/${totalAnswered} (${globalPercentage}%)</span>
-        `;
-        this.statsEl.appendChild(globalStatEl);
     }
 
     loadStats() {
@@ -245,7 +310,16 @@ class QuizApp {
     }
 }
 
+// Fonctions globales pour les boutons
+function startQuiz(subject) {
+    if (window.quizApp) {
+        window.quizApp.loadSubject(subject);
+    }
+}
+
 // Initialiser l'application
 document.addEventListener('DOMContentLoaded', () => {
-    new QuizApp();
+    console.log('Initialisation du quiz...');
+    window.quizApp = new QuizApp();
 });
+
