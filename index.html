@@ -3,1248 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎓 Manon révise le Brevet 2025</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <title>🎓 Quiz Brevet Manon</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea, #764ba2); 
+            color: white; 
             min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
         }
-        
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        .quiz-container { 
+            background: white; 
+            color: #333; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
         }
-        
-        .floating-emoji {
-            position: absolute;
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0.3;
+        .question { 
+            font-size: 1.3rem; 
+            margin-bottom: 20px; 
+            padding: 20px; 
+            background: #f8f9fa; 
+            border-radius: 10px; 
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+        .answer { 
+            display: block; 
+            margin: 10px 0; 
+            padding: 15px; 
+            background: #e9ecef; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%; 
+            text-align: left; 
+            font-size: 1rem;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+        .answer:hover { background: #dee2e6; }
+        .answer.selected { background: #007bff; color: white; }
+        .answer.correct { background: #28a745; color: white; }
+        .answer.incorrect { background: #dc3545; color: white; }
+        .btn { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            margin: 10px 5px;
         }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: slideDown 1s ease-out;
-        }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-        
-        .motivation-bar {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        
-        .level-info {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .level-badge {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #333;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .subject-card {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .subject-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-        }
-        
-        .card-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-        }
-        
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #667eea;
-        }
-        
-        .card-description {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .card-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background: #f8f9fa;
-            padding: 15px;
+        .btn:hover { background: #0056b3; }
+        .btn:disabled { background: #6c757d; cursor: not-allowed; }
+        .score { 
+            text-align: center; 
+            font-size: 1.5rem; 
+            margin: 20px 0; 
+            padding: 20px; 
+            background: #f8f9fa; 
             border-radius: 10px;
         }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: #666;
-        }
-        
-        .progress-mini {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4CAF50, #45a049);
-            width: 0%;
-            transition: width 1s ease;
-            border-radius: 4px;
-        }
-        
-        .start-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .start-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        .explanation { 
+            background: #d1ecf1; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-top: 15px; 
             display: none;
         }
-        
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #eee;
-            flex-wrap: wrap;
-            gap: 15px;
+        h1 { text-align: center; margin-bottom: 30px; }
+        .subject-selector { 
+            text-align: center; 
+            margin-bottom: 30px; 
         }
-        
-        .back-btn {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .back-btn:hover {
-            background: #5a6268;
-            transform: translateX(-5px);
-        }
-        
-        .progress-info {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.2rem;
-        }
-        
-        .score-info {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #333;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        
-        .difficulty-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
-            position: relative;
-        }
-        
-        .question-text::before {
-            content: '🤔';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-        }
-        
-        .answers-container {
-            margin-bottom: 30px;
-        }
-        
-        .answer-option {
-            background: #f8f9fa;
-            border: 3px solid #e9ecef;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .subject-btn { 
+            background: #28a745; 
+            color: white; 
+            border: none; 
+            padding: 15px 25px; 
+            margin: 10px; 
+            border-radius: 10px; 
+            cursor: pointer; 
             font-size: 1.1rem;
         }
-        
-        .answer-option:hover {
-            border-color: #667eea;
-            background: #e3f2fd;
-            transform: translateX(10px);
-        }
-        
-        .answer-option.selected {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-color: #667eea;
-        }
-        
-        .answer-option.correct {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            border-color: #28a745;
-            color: #155724;
-        }
-        
-        .answer-option.incorrect {
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-            border-color: #dc3545;
-            color: #721c24;
-        }
-        
-        .quiz-controls {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .btn {
-            background: linear-gradient(45deg, #28a745, #20c997);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        
-        .explanation {
-            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
-            border: 2px solid #17a2b8;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 25px;
-            display: none;
-            position: relative;
-        }
-        
-        .explanation::before {
-            content: '💡';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .final-score {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 20px;
-            margin-top: 30px;
-            border: 3px solid #667eea;
-        }
-        
-        .final-score h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-        
-        .score-excellent { 
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            border-color: #28a745;
-        }
-        
-        .score-good { 
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            border-color: #ffc107;
-        }
-        
-        .score-needs-work { 
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-            border-color: #dc3545;
-        }
-        
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            color: white;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255,255,255,0.3);
-            border-top: 5px solid #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .subjects-grid { grid-template-columns: 1fr; }
-            .quiz-header { 
-                flex-direction: column; 
-                text-align: center;
-                gap: 10px; 
-            }
-            .card-stats { flex-direction: column; gap: 10px; }
-            .level-info { flex-direction: column; }
-            .container { padding: 15px; }
-            .quiz-container { padding: 20px; }
-        }
+        .subject-btn:hover { background: #218838; }
     </style>
 </head>
 <body>
-    <div class="bg-animation">
-        <div class="floating-emoji" style="top: 10%; left: 10%; animation-delay: 0s;">📚</div>
-        <div class="floating-emoji" style="top: 20%; right: 15%; animation-delay: 1s;">📐</div>
-        <div class="floating-emoji" style="top: 70%; left: 20%; animation-delay: 2s;">🏛️</div>
-        <div class="floating-emoji" style="bottom: 20%; right: 10%; animation-delay: 3s;">🔬</div>
-        <div class="floating-emoji" style="bottom: 10%; left: 15%; animation-delay: 4s;">⚡</div>
-    </div>
+    <div class="quiz-container">
+        <h1>🎓 Quiz Brevet 2025 - Manon</h1>
+        
+        <div id="menu" class="subject-selector">
+            <h2>Choisissez votre matière :</h2>
+            <button class="subject-btn" onclick="startQuiz('francais')">📚 Français</button>
+            <button class="subject-btn" onclick="startQuiz('maths')">📐 Mathématiques</button>
+            <button class="subject-btn" onclick="startQuiz('histoire')">🏛️ Histoire-Géo</button>
+            <button class="subject-btn" onclick="startQuiz('sciences')">🔬 Sciences</button>
+            <button class="subject-btn" onclick="startQuiz('physique')">⚡ Physique-Chimie</button>
+        </div>
 
-    <div class="container">
-        <header>
-            <h1>🎓 Manon révise le Brevet 2025</h1>
-            <p class="subtitle">Plus de 50 questions pour réussir ton brevet !</p>
+        <div id="quiz" style="display: none;">
+            <div class="score">
+                <span id="current-subject">Matière</span> - 
+                Question <span id="current-q">1</span>/<span id="total-q">10</span> - 
+                Score: <span id="score">0</span>/<span id="answered">0</span>
+            </div>
             
-            <div class="motivation-bar">
-                <div class="level-info">
-                    <div class="level-badge">🏆 Niveau: <span id="user-level">Débutant</span></div>
-                    <div class="level-badge">🔥 Série: <span id="streak">0</span> jours</div>
-                    <div class="level-badge">⭐ Score global: <span id="global-score">0%</span></div>
-                </div>
-            </div>
-        </header>
-
-        <div id="menu">
-            <div class="subjects-grid">
-                <div class="subject-card" data-subject="francais">
-                    <div class="card-icon">📚</div>
-                    <div class="card-title">Français</div>
-                    <div class="card-description">Grammaire, littérature, expression écrite et analyse de textes</div>
-                    <div class="card-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10</div>
-                            <div class="stat-label">questions</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="francais-score">0%</div>
-                            <div class="stat-label">réussite</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="francais-done">0</div>
-                            <div class="stat-label">faites</div>
-                        </div>
-                    </div>
-                    <div class="progress-mini">
-                        <div class="progress-fill" id="francais-progress"></div>
-                    </div>
-                    <button class="start-btn" onclick="startQuiz('francais')">
-                        <span>Commencer</span>
-                        <span class="btn-emoji">🚀</span>
-                    </button>
-                </div>
-
-                <div class="subject-card" data-subject="maths">
-                    <div class="card-icon">📐</div>
-                    <div class="card-title">Mathématiques</div>
-                    <div class="card-description">Algèbre, géométrie, statistiques et fonctions</div>
-                    <div class="card-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10</div>
-                            <div class="stat-label">questions</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="maths-score">0%</div>
-                            <div class="stat-label">réussite</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="maths-done">0</div>
-                            <div class="stat-label">faites</div>
-                        </div>
-                    </div>
-                    <div class="progress-mini">
-                        <div class="progress-fill" id="maths-progress"></div>
-                    </div>
-                    <button class="start-btn" onclick="startQuiz('maths')">
-                        <span>Commencer</span>
-                        <span class="btn-emoji">🚀</span>
-                    </button>
-                </div>
-
-                <div class="subject-card" data-subject="histoire">
-                    <div class="card-icon">🏛️</div>
-                    <div class="card-title">Histoire-Géographie</div>
-                    <div class="card-description">Histoire contemporaine, géographie et EMC</div>
-                    <div class="card-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10</div>
-                            <div class="stat-label">questions</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="histoire-score">0%</div>
-                            <div class="stat-label">réussite</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="histoire-done">0</div>
-                            <div class="stat-label">faites</div>
-                        </div>
-                    </div>
-                    <div class="progress-mini">
-                        <div class="progress-fill" id="histoire-progress"></div>
-                    </div>
-                    <button class="start-btn" onclick="startQuiz('histoire')">
-                        <span>Commencer</span>
-                        <span class="btn-emoji">🚀</span>
-                    </button>
-                </div>
-
-                <div class="subject-card" data-subject="sciences">
-                    <div class="card-icon">🔬</div>
-                    <div class="card-title">Sciences (SVT)</div>
-                    <div class="card-description">Biologie, géologie et environnement</div>
-                    <div class="card-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10</div>
-                            <div class="stat-label">questions</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="sciences-score">0%</div>
-                            <div class="stat-label">réussite</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="sciences-done">0</div>
-                            <div class="stat-label">faites</div>
-                        </div>
-                    </div>
-                    <div class="progress-mini">
-                        <div class="progress-fill" id="sciences-progress"></div>
-                    </div>
-                    <button class="start-btn" onclick="startQuiz('sciences')">
-                        <span>Commencer</span>
-                        <span class="btn-emoji">🚀</span>
-                    </button>
-                </div>
-
-                <div class="subject-card" data-subject="physique">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-title">Physique-Chimie</div>
-                    <div class="card-description">Mécanique, électricité et chimie</div>
-                    <div class="card-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10</div>
-                            <div class="stat-label">questions</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="physique-score">0%</div>
-                            <div class="stat-label">réussite</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="physique-done">0</div>
-                            <div class="stat-label">faites</div>
-                        </div>
-                    </div>
-                    <div class="progress-mini">
-                        <div class="progress-fill" id="physique-progress"></div>
-                    </div>
-                    <button class="start-btn" onclick="startQuiz('physique')">
-                        <span>Commencer</span>
-                        <span class="btn-emoji">🚀</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div id="quiz" class="quiz-container">
-            <div class="quiz-header">
-                <button class="back-btn" onclick="backToMenu()">
-                    <span>←</span> Retour
-                </button>
-                <div class="progress-info">
-                    <span id="current-subject"></span> - 
-                    Question <span id="current-question">1</span> sur <span id="total-questions">10</span>
-                </div>
-                <div class="score-info">
-                    Score: <span id="current-score">0</span>/<span id="total-answered">0</span>
-                    (<span id="percentage">0%</span>)
-                </div>
-            </div>
-
-            <div class="question-container">
-                <div class="question-number">
-                    Question <span id="question-num">1</span>
-                    <span class="difficulty-badge" id="difficulty">⭐</span>
-                </div>
-                
-                <div class="question-text" id="question-text">
-                    Chargement de la question...
-                </div>
-
-                <div class="answers-container" id="answers-container">
-                    <!-- Les réponses seront générées ici -->
-                </div>
-
-                <div class="quiz-controls">
-                    <button class="btn" id="validate-btn" onclick="validateAnswer()" disabled>
-                        <span>✓</span> Valider ma réponse
-                    </button>
-                    <button class="btn" id="next-btn" onclick="nextQuestion()" style="display:none;">
-                        Question suivante <span>→</span>
-                    </button>
-                    <button class="btn" id="finish-btn" onclick="finishQuiz()" style="display:none;">
-                        <span>🏆</span> Voir mon score
-                    </button>
-                </div>
-
-                <div class="explanation" id="explanation">
-                    <!-- Explication de la réponse -->
-                </div>
-            </div>
-        </div>
-
-        <div id="loading" class="loading-screen">
-            <div class="spinner"></div>
-            <p>Chargement des questions...</p>
+            <div class="question" id="question">Question...</div>
+            
+            <div id="answers"></div>
+            
+            <button class="btn" id="validate" onclick="validate()" disabled>Valider</button>
+            <button class="btn" id="next" onclick="next()" style="display:none;">Question suivante</button>
+            <button class="btn" onclick="backToMenu()">Retour au menu</button>
+            
+            <div class="explanation" id="explanation"></div>
         </div>
     </div>
 
     <script>
-        // Base de données des questions (10 par matière)
-        const questionsDatabase = {
+        const questions = {
             francais: [
-                {
-                    question: "Quel genre littéraire est privilégié pour explorer le thème 'Se chercher, se construire' ?",
-                    answers: ["L'autobiographie", "Le théâtre", "La poésie", "Le roman policier"],
-                    correct: 0,
-                    explanation: "L'autobiographie permet d'explorer la construction de soi et l'identité personnelle.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Combien de syllabes compte un alexandrin ?",
-                    answers: ["10", "12", "8", "14"],
-                    correct: 1,
-                    explanation: "L'alexandrin est un vers de douze syllabes, très utilisé en poésie classique.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Identifiez la figure de style : 'Ses yeux sont des étoiles'",
-                    answers: ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
-                    correct: 1,
-                    explanation: "C'est une métaphore car il y a assimilation directe sans outil de comparaison.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Au théâtre, comment appelle-t-on les paroles qu'un personnage se dit à lui-même ?",
-                    answers: ["Monologue", "Dialogue", "Aparté", "Soliloque"],
-                    correct: 0,
-                    explanation: "Le monologue est un discours d'un personnage seul sur scène.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Dans un sonnet, combien y a-t-il de vers au total ?",
-                    answers: ["12", "14", "16", "18"],
-                    correct: 1,
-                    explanation: "Le sonnet comporte 14 vers : 2 quatrains et 2 tercets.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Quelle est la fonction du mot souligné : 'Je donne ce livre à mon frère' ?",
-                    answers: ["COD", "COI", "Complément du nom", "Attribut"],
-                    correct: 1,
-                    explanation: "'À mon frère' est un complément d'objet indirect introduit par 'à'.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Dans 'Il faut que tu viennes', quel est le mode du verbe 'viennes' ?",
-                    answers: ["Indicatif", "Subjonctif", "Conditionnel", "Impératif"],
-                    correct: 1,
-                    explanation: "Après 'il faut que', on utilise obligatoirement le subjonctif.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Accordez correctement : 'Les fleurs que j'ai...'",
-                    answers: ["cueilli", "cueillie", "cueillies", "cueillis"],
-                    correct: 2,
-                    explanation: "Le participe passé s'accorde avec le COD 'que' placé avant l'auxiliaire avoir.",
-                    difficulty: "difficile"
-                },
-                {
-                    question: "Dans 'Le vent souffle et murmure', quelle figure de style ?",
-                    answers: ["Métaphore", "Personnification", "Allitération", "Oxymore"],
-                    correct: 1,
-                    explanation: "Le vent est doté de capacités humaines (personnification).",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "L'anaphore consiste à :",
-                    answers: ["Répéter un mot en fin", "Répéter un mot en début", "Inverser l'ordre", "Supprimer des mots"],
-                    correct: 1,
-                    explanation: "L'anaphore répète un mot en début de phrases successives.",
-                    difficulty: "moyen"
-                }
+                {q: "Combien de syllabes dans un alexandrin ?", a: ["10", "12", "8", "14"], c: 1, e: "L'alexandrin = 12 syllabes"},
+                {q: "Quel genre pour 'Se chercher, se construire' ?", a: ["Autobiographie", "Théâtre", "Poésie", "Roman"], c: 0, e: "L'autobiographie explore la construction de soi"},
+                {q: "'Ses yeux sont des étoiles' = ?", a: ["Comparaison", "Métaphore", "Personnification", "Hyperbole"], c: 1, e: "Métaphore = assimilation directe"},
+                {q: "Un sonnet a combien de vers ?", a: ["12", "14", "16", "18"], c: 1, e: "14 vers : 2 quatrains + 2 tercets"},
+                {q: "Monologue au théâtre = ?", a: ["Dialogue", "Discours seul", "Indication", "Acte"], c: 1, e: "Discours d'un personnage seul"}
             ],
-            
             maths: [
-                {
-                    question: "Résoudre l'équation : 3x + 5 = 14",
-                    answers: ["x = 3", "x = 4", "x = 5", "x = 6"],
-                    correct: 0,
-                    explanation: "3x = 14 - 5 = 9, donc x = 9/3 = 3",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Si f(x) = 2x + 3, que vaut f(4) ?",
-                    answers: ["11", "10", "9", "8"],
-                    correct: 0,
-                    explanation: "f(4) = 2×4 + 3 = 8 + 3 = 11",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Dans un triangle rectangle, si les côtés de l'angle droit mesurent 3 et 4, l'hypoténuse mesure :",
-                    answers: ["5", "6", "7", "25"],
-                    correct: 0,
-                    explanation: "D'après Pythagore : c² = 3² + 4² = 25, donc c = 5",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Dans la série : 2, 5, 7, 8, 10, la médiane est :",
-                    answers: ["6", "7", "8", "6.4"],
-                    correct: 1,
-                    explanation: "La médiane est la valeur centrale : 7 (3ème valeur sur 5)",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Développer : (x + 3)(x - 2)",
-                    answers: ["x² + x - 6", "x² - x - 6", "x² + x + 6", "x² - x + 6"],
-                    correct: 0,
-                    explanation: "(x+3)(x-2) = x² - 2x + 3x - 6 = x² + x - 6",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "L'aire d'un disque de rayon 5 cm est :",
-                    answers: ["25π cm²", "10π cm²", "5π cm²", "50π cm²"],
-                    correct: 0,
-                    explanation: "Aire = πr² = π × 5² = 25π cm²",
-                    difficulty: "facile"
-                },
-                {
-                    question: "On lance un dé équilibré. La probabilité d'obtenir un nombre pair est :",
-                    answers: ["1/6", "1/3", "1/2", "2/3"],
-                    correct: 2,
-                    explanation: "Nombres pairs : 2, 4, 6. Probabilité = 3/6 = 1/2",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Factoriser : x² - 9",
-                    answers: ["(x-3)²", "(x+3)²", "(x-3)(x+3)", "(x-9)(x+1)"],
-                    correct: 2,
-                    explanation: "x² - 9 = x² - 3² = (x-3)(x+3) (identité remarquable)",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Dans un triangle, la somme des angles vaut :",
-                    answers: ["90°", "180°", "270°", "360°"],
-                    correct: 1,
-                    explanation: "La somme des angles d'un triangle est toujours égale à 180°",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Une fonction linéaire passe toujours par :",
-                    answers: ["(0;1)", "(1;0)", "(0;0)", "(1;1)"],
-                    correct: 2,
-                    explanation: "Une fonction linéaire f(x) = ax passe toujours par l'origine",
-                    difficulty: "facile"
-                }
+                {q: "3x + 5 = 14, x = ?", a: ["x = 3", "x = 4", "x = 5", "x = 6"], c: 0, e: "3x = 9, donc x = 3"},
+                {q: "f(x) = 2x + 3, f(4) = ?", a: ["11", "10", "9", "8"], c: 0, e: "f(4) = 2×4 + 3 = 11"},
+                {q: "Triangle rectangle 3-4, hypoténuse = ?", a: ["5", "6", "7", "25"], c: 0, e: "Pythagore: c² = 3² + 4² = 25, c = 5"},
+                {q: "Médiane de 2,5,7,8,10 = ?", a: ["6", "7", "8", "6.4"], c: 1, e: "Valeur centrale = 7"},
+                {q: "(x+3)(x-2) = ?", a: ["x²+x-6", "x²-x-6", "x²+x+6", "x²-x+6"], c: 0, e: "x² - 2x + 3x - 6 = x² + x - 6"}
             ],
-            
             histoire: [
-                {
-                    question: "Quelle est la date de l'indépendance de l'Inde ?",
-                    answers: ["1945", "1947", "1950", "1952"],
-                    correct: 1,
-                    explanation: "L'Inde obtient son indépendance le 15 août 1947.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "La Ve République est fondée en :",
-                    answers: ["1956", "1958", "1960", "1962"],
-                    correct: 1,
-                    explanation: "Constitution adoptée par référendum le 28 septembre 1958.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "La guerre froide commence vers :",
-                    answers: ["1945", "1947", "1949", "1950"],
-                    correct: 1,
-                    explanation: "1947 marque le début avec la doctrine Truman.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Les femmes obtiennent le droit de vote en France en :",
-                    answers: ["1936", "1944", "1946", "1958"],
-                    correct: 1,
-                    explanation: "Ordonnance du 21 avril 1944.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Le mur de Berlin est construit en :",
-                    answers: ["1959", "1961", "1963", "1965"],
-                    correct: 1,
-                    explanation: "Nuit du 12 au 13 août 1961.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Une aire urbaine comprend :",
-                    answers: ["Ville-centre seulement", "Ville-centre + banlieue", "Ville-centre + banlieue + couronne périurbaine", "Toute la région"],
-                    correct: 2,
-                    explanation: "L'aire urbaine inclut le pôle urbain et la couronne périurbaine.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Qui était le leader de l'indépendance indienne prônant la non-violence ?",
-                    answers: ["Nehru", "Gandhi", "Jinnah", "Mountbatten"],
-                    correct: 1,
-                    explanation: "Gandhi développe la philosophie de la non-violence.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Le premier président de la Ve République est :",
-                    answers: ["René Coty", "Charles de Gaulle", "Georges Pompidou", "Vincent Auriol"],
-                    correct: 1,
-                    explanation: "Charles de Gaulle, élu en décembre 1958.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "La pilule contraceptive est autorisée en France en :",
-                    answers: ["1965", "1967", "1970", "1975"],
-                    correct: 1,
-                    explanation: "Loi Neuwirth du 28 décembre 1967.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "L'Union européenne compte actuellement :",
-                    answers: ["25 États", "27 États", "28 États", "30 États"],
-                    correct: 1,
-                    explanation: "27 États membres depuis le Brexit (2020).",
-                    difficulty: "facile"
-                }
+                {q: "Indépendance de l'Inde ?", a: ["1945", "1947", "1950", "1952"], c: 1, e: "15 août 1947"},
+                {q: "Ve République fondée en ?", a: ["1956", "1958", "1960", "1962"], c: 1, e: "28 septembre 1958"},
+                {q: "Guerre froide commence ?", a: ["1945", "1947", "1949", "1950"], c: 1, e: "1947 : doctrine Truman"},
+                {q: "Droit de vote femmes France ?", a: ["1936", "1944", "1946", "1958"], c: 1, e: "21 avril 1944"},
+                {q: "Mur de Berlin construit ?", a: ["1959", "1961", "1963", "1965"], c: 1, e: "12-13 août 1961"}
             ],
-            
             sciences: [
-                {
-                    question: "La fécondation a lieu dans :",
-                    answers: ["L'ovaire", "L'utérus", "La trompe de Fallope", "Le vagin"],
-                    correct: 2,
-                    explanation: "La fécondation se produit dans la trompe de Fallope.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Un chromosome contient :",
-                    answers: ["De l'ARN", "De l'ADN", "Des protéines", "Des lipides"],
-                    correct: 1,
-                    explanation: "Les chromosomes sont constitués d'ADN et de protéines.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "L'être humain possède :",
-                    answers: ["23 chromosomes", "46 chromosomes", "48 chromosomes", "44 chromosomes"],
-                    correct: 1,
-                    explanation: "46 chromosomes (23 paires) dans chaque cellule.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "La dérive des continents est proposée par :",
-                    answers: ["Darwin", "Wegener", "Mendel", "Pasteur"],
-                    correct: 1,
-                    explanation: "Alfred Wegener en 1912.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Le neurone est :",
-                    answers: ["Une cellule musculaire", "Une cellule nerveuse", "Une cellule sanguine", "Une cellule osseuse"],
-                    correct: 1,
-                    explanation: "Cellule de base du système nerveux.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Les anticorps sont produits par :",
-                    answers: ["Les globules rouges", "Les lymphocytes B", "Les lymphocytes T", "Les plaquettes"],
-                    correct: 1,
-                    explanation: "Les lymphocytes B produisent les anticorps.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Les gamètes contiennent :",
-                    answers: ["23 chromosomes", "46 chromosomes", "22 chromosomes", "24 chromosomes"],
-                    correct: 0,
-                    explanation: "Les gamètes sont haploïdes (23 chromosomes).",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Vitesse des plaques tectoniques :",
-                    answers: ["Quelques mm/an", "Quelques cm/an", "Quelques m/an", "Quelques km/an"],
-                    correct: 1,
-                    explanation: "Les plaques se déplacent de quelques cm par an.",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Un réflexe est :",
-                    answers: ["Une réponse volontaire", "Une réponse automatique", "Une réponse lente", "Une réponse consciente"],
-                    correct: 1,
-                    explanation: "Le réflexe est automatique et involontaire.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "La vaccination consiste à :",
-                    answers: ["Injecter des anticorps", "Stimuler la production d'anticorps", "Détruire les virus", "Renforcer les muscles"],
-                    correct: 1,
-                    explanation: "La vaccination stimule le système immunitaire.",
-                    difficulty: "moyen"
-                }
+                {q: "Fécondation lieu ?", a: ["Ovaire", "Utérus", "Trompe Fallope", "Vagin"], c: 2, e: "Dans la trompe de Fallope"},
+                {q: "Chromosome contient ?", a: ["ARN", "ADN", "Protéines", "Lipides"], c: 1, e: "ADN + protéines"},
+                {q: "Humain possède ?", a: ["23 chromosomes", "46 chromosomes", "48", "44"], c: 1, e: "46 chromosomes (23 paires)"},
+                {q: "Dérive continents proposée par ?", a: ["Darwin", "Wegener", "Mendel", "Pasteur"], c: 1, e: "Alfred Wegener (1912)"},
+                {q: "Neurone = ?", a: ["Cellule musculaire", "Cellule nerveuse", "Cellule sanguine", "Cellule osseuse"], c: 1, e: "Cellule du système nerveux"}
             ],
-            
             physique: [
-                {
-                    question: "Un atome est constitué :",
-                    answers: ["Seulement de protons", "D'un noyau et d'électrons", "Seulement d'électrons", "De molécules"],
-                    correct: 1,
-                    explanation: "Noyau (protons + neutrons) et électrons.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "La vitesse se calcule par :",
-                    answers: ["v = d × t", "v = d / t", "v = t / d", "v = d + t"],
-                    correct: 1,
-                    explanation: "Vitesse = distance / temps",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Circuit en série, l'intensité :",
-                    answers: ["Varie", "Est la même partout", "Diminue", "Augmente"],
-                    correct: 1,
-                    explanation: "L'intensité est identique en tous points.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Charge d'un proton :",
-                    answers: ["Positive", "Négative", "Neutre", "Variable"],
-                    correct: 0,
-                    explanation: "Le proton porte une charge positive.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Formule chimique de l'eau :",
-                    answers: ["H₂O", "HO₂", "H₃O", "H₂O₂"],
-                    correct: 0,
-                    explanation: "2 atomes d'hydrogène et 1 atome d'oxygène.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Le poids dépend :",
-                    answers: ["De la masse seulement", "De la gravité seulement", "De la masse et de la gravité", "De la taille"],
-                    correct: 2,
-                    explanation: "Poids = masse × gravité",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Loi d'Ohm :",
-                    answers: ["U = R × I", "I = U × R", "R = U × I", "U = I / R"],
-                    correct: 0,
-                    explanation: "Tension = Résistance × Intensité",
-                    difficulty: "moyen"
-                },
-                {
-                    question: "Le son se propage :",
-                    answers: ["Dans le vide", "Seulement dans l'air", "Dans la matière", "Partout"],
-                    correct: 2,
-                    explanation: "Le son a besoin d'un milieu matériel.",
-                    difficulty: "facile"
-                },
-                {
-                    question: "Une solution de pH = 3 est :",
-                    answers: ["Basique", "Neutre", "Acide", "Indéterminée"],
-                    correct: 2,
-                    explanation: "pH < 7 = solution acide",
-                    difficulty: "facile"
-                },
-                {
-                    question: "L'énergie cinétique dépend :",
-                    answers: ["De la masse seulement", "De la vitesse seulement", "De la masse et de la vitesse", "De la hauteur"],
-                    correct: 2,
-                    explanation: "Ec = ½mv² (masse et vitesse)",
-                    difficulty: "difficile"
-                }
+                {q: "Atome constitué de ?", a: ["Protons seuls", "Noyau + électrons", "Électrons seuls", "Molécules"], c: 1, e: "Noyau (protons+neutrons) + électrons"},
+                {q: "Vitesse = ?", a: ["d × t", "d / t", "t / d", "d + t"], c: 1, e: "distance / temps"},
+                {q: "Circuit série, intensité ?", a: ["Varie", "Même partout", "Diminue", "Augmente"], c: 1, e: "Identique en tous points"},
+                {q: "Charge proton ?", a: ["Positive", "Négative", "Neutre", "Variable"], c: 0, e: "Charge positive (+e)"},
+                {q: "Formule eau ?", a: ["H₂O", "HO₂", "H₃O", "H₂O₂"], c: 0, e: "2 hydrogène + 1 oxygène"}
             ]
         };
 
-        // Variables globales
-        let currentSubject = '';
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let selectedAnswer = null;
-        let userStats = loadStats();
+        let currentSubject, currentQuestions, currentIndex, score, selectedAnswer;
 
-        // Configuration
-        const CONFIG = {
-            questionsPerQuiz: 10,
-            subjects: {
-                francais: 'Français',
-                maths: 'Mathématiques',
-                histoire: 'Histoire-Géographie',
-                sciences: 'Sciences (SVT)',
-                physique: 'Physique-Chimie'
-            }
-        };
-
-        // Démarrer un quiz
         function startQuiz(subject) {
             currentSubject = subject;
-            currentQuestions = shuffleArray([...questionsDatabase[subject]]);
-            currentQuestionIndex = 0;
+            currentQuestions = questions[subject];
+            currentIndex = 0;
             score = 0;
             selectedAnswer = null;
-
-            // Interface
+            
             document.getElementById('menu').style.display = 'none';
             document.getElementById('quiz').style.display = 'block';
-
-            // Mise à jour de l'en-tête
-            document.getElementById('current-subject').textContent = CONFIG.subjects[subject];
-            document.getElementById('total-questions').textContent = currentQuestions.length;
-
+            document.getElementById('current-subject').textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+            document.getElementById('total-q').textContent = currentQuestions.length;
+            
             showQuestion();
         }
 
-        // Afficher une question
         function showQuestion() {
-            const question = currentQuestions[currentQuestionIndex];
+            const q = currentQuestions[currentIndex];
+            document.getElementById('current-q').textContent = currentIndex + 1;
+            document.getElementById('question').textContent = q.q;
             
-            // Mise à jour des informations
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('question-num').textContent = currentQuestionIndex + 1;
-            document.getElementById('question-text').textContent = question.question;
-
-            // Affichage de la difficulté
-            const difficultyEl = document.getElementById('difficulty');
-            const stars = getDifficultyStars(question.difficulty || 'moyen');
-            difficultyEl.textContent = stars;
-
-            // Génération des réponses
-            const container = document.getElementById('answers-container');
-            container.innerHTML = '';
-
-            question.answers.forEach((answer, index) => {
-                const div = document.createElement('div');
-                div.className = 'answer-option';
-                div.textContent = answer;
-                div.onclick = () => selectAnswer(index);
-                container.appendChild(div);
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            
+            q.a.forEach((answer, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer';
+                btn.textContent = answer;
+                btn.onclick = () => selectAnswer(i);
+                answersDiv.appendChild(btn);
             });
-
-            // Réinitialisation des boutons
-            document.getElementById('validate-btn').disabled = true;
-            document.getElementById('validate-btn').style.display = 'inline-flex';
-            document.getElementById('next-btn').style.display = 'none';
-            document.getElementById('finish-btn').style.display = 'none';
+            
+            document.getElementById('validate').disabled = true;
+            document.getElementById('next').style.display = 'none';
             document.getElementById('explanation').style.display = 'none';
-
             selectedAnswer = null;
             updateScore();
-        }
-
-        function getDifficultyStars(difficulty) {
-            switch(difficulty) {
-                case 'facile': return '⭐';
-                case 'moyen': return '⭐⭐';
-                case 'difficile': return '⭐⭐⭐';
-                default: return '⭐⭐';
-            }
         }
 
         function selectAnswer(index) {
             selectedAnswer = index;
-            
-            // Mise à jour visuelle
-            document.querySelectorAll('.answer-option').forEach((option, i) => {
-                option.classList.remove('selected');
-                if (i === index) {
-                    option.classList.add('selected');
-                }
+            document.querySelectorAll('.answer').forEach((btn, i) => {
+                btn.classList.remove('selected');
+                if (i === index) btn.classList.add('selected');
             });
-
-            document.getElementById('validate-btn').disabled = false;
+            document.getElementById('validate').disabled = false;
         }
 
-        function validateAnswer() {
-            if (selectedAnswer === null) return;
-
-            const question = currentQuestions[currentQuestionIndex];
-            const isCorrect = selectedAnswer === question.correct;
-
-            // Mise à jour du score
-            if (isCorrect) {
-                score++;
-                userStats[currentSubject].correct++;
-            } else {
-                userStats[currentSubject].incorrect++;
-            }
-
-            // Coloration des réponses
-            document.querySelectorAll('.answer-option').forEach((option, index) => {
-                option.onclick = null;
-                
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedAnswer && !isCorrect) {
-                    option.classList.add('incorrect');
-                }
-            });
-
-            // Affichage de l'explication
-            const explanationDiv = document.getElementById('explanation');
-            explanationDiv.innerHTML = `
-                <strong>💡 Explication :</strong><br>
-                ${question.explanation}
-            `;
-            explanationDiv.style.display = 'block';
-
-            // Gestion des boutons
-            document.getElementById('validate-btn').style.display = 'none';
+        function validate() {
+            const q = currentQuestions[currentIndex];
+            const isCorrect = selectedAnswer === q.c;
             
-            if (currentQuestionIndex < currentQuestions.length - 1) {
-                document.getElementById('next-btn').style.display = 'inline-flex';
+            if (isCorrect) score++;
+            
+            document.querySelectorAll('.answer').forEach((btn, i) => {
+                btn.onclick = null;
+                if (i === q.c) btn.classList.add('correct');
+                else if (i === selectedAnswer && !isCorrect) btn.classList.add('incorrect');
+            });
+            
+            document.getElementById('explanation').innerHTML = `<strong>💡 ${q.e}</strong>`;
+            document.getElementById('explanation').style.display = 'block';
+            document.getElementById('validate').style.display = 'none';
+            
+            if (currentIndex < currentQuestions.length - 1) {
+                document.getElementById('next').style.display = 'inline-block';
             } else {
-                document.getElementById('finish-btn').style.display = 'inline-flex';
+                showFinalScore();
             }
-
             updateScore();
-            saveStats();
         }
 
-        function nextQuestion() {
-            currentQuestionIndex++;
+        function next() {
+            currentIndex++;
+            document.getElementById('validate').style.display = 'inline-block';
             showQuestion();
         }
 
-        function finishQuiz() {
+        function showFinalScore() {
             const percentage = Math.round((score / currentQuestions.length) * 100);
-            let message, className, emoji;
-
-            if (percentage >= 80) {
-                message = 'Excellent ! Tu maîtrises parfaitement ce sujet !';
-                className = 'score-excellent';
-                emoji = '🎉';
-            } else if (percentage >= 60) {
-                message = 'Bien joué ! Continue tes révisions !';
-                className = 'score-good';
-                emoji = '👍';
-            } else {
-                message = 'Il faut encore réviser ce sujet !';
-                className = 'score-needs-work';
-                emoji = '💪';
-            }
-
-            // Affichage du score final
-            const finalScoreDiv = document.createElement('div');
-            finalScoreDiv.className = `final-score ${className}`;
-            finalScoreDiv.innerHTML = `
-                <h2>${emoji} Quiz terminé !</h2>
-                <h3>Score final : ${score}/${currentQuestions.length} (${percentage}%)</h3>
-                <p style="font-size: 1.2rem; margin: 20px 0;">${message}</p>
-                <div style="margin: 20px 0;">
-                    <p><strong>Bonnes réponses :</strong> ${score}</p>
-                    <p><strong>Erreurs :</strong> ${currentQuestions.length - score}</p>
-                </div>
-                <button class="btn" onclick="backToMenu()" style="margin-top: 20px;">
-                    🏠 Retour au menu principal
-                </button>
-                <button class="btn" onclick="startQuiz('${currentSubject}')" style="margin-top: 20px; background: linear-gradient(45deg, #667eea, #764ba2);">
-                    🔄 Refaire un quiz
-                </button>
-            `;
-
-            document.getElementById('explanation').appendChild(finalScoreDiv);
-            document.getElementById('finish-btn').style.display = 'none';
+            let message = percentage >= 80 ? '🎉 Excellent !' : percentage >= 60 ? '👍 Bien joué !' : '💪 Continue !';
             
-            // Mise à jour des statistiques globales
-            updateUI();
+            document.getElementById('explanation').innerHTML = `
+                <h3>Quiz terminé ! ${message}</h3>
+                <p><strong>Score final : ${score}/${currentQuestions.length} (${percentage}%)</strong></p>
+                <button class="btn" onclick="startQuiz('${currentSubject}')">🔄 Refaire</button>
+            `;
         }
 
         function backToMenu() {
@@ -1253,107 +256,9 @@
         }
 
         function updateScore() {
-            const totalAnswered = currentQuestionIndex + (selectedAnswer !== null ? 1 : 0);
-            const percentage = totalAnswered > 0 ? Math.round((score / totalAnswered) * 100) : 0;
-            
-            document.getElementById('current-score').textContent = score;
-            document.getElementById('total-answered').textContent = totalAnswered;
-            document.getElementById('percentage').textContent = `${percentage}%`;
+            document.getElementById('score').textContent = score;
+            document.getElementById('answered').textContent = currentIndex + (selectedAnswer !== null ? 1 : 0);
         }
-
-        // Fonctions utilitaires
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
-        function loadStats() {
-            const defaultStats = {};
-            Object.keys(CONFIG.subjects).forEach(subject => {
-                defaultStats[subject] = { correct: 0, incorrect: 0 };
-            });
-
-            const saved = localStorage.getItem('brevetQuizStats2025');
-            return saved ? { ...defaultStats, ...JSON.parse(saved) } : defaultStats;
-        }
-
-        function saveStats() {
-            localStorage.setItem('brevetQuizStats2025', JSON.stringify(userStats));
-        }
-
-        function updateUI() {
-            updateGlobalStats();
-            updateSubjectStats();
-        }
-
-        function updateGlobalStats() {
-            const totalCorrect = Object.values(userStats).reduce((sum, stat) => sum + stat.correct, 0);
-            const totalAnswered = Object.values(userStats).reduce((sum, stat) => sum + stat.correct + stat.incorrect, 0);
-            const globalPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-
-            document.getElementById('global-score').textContent = `${globalPercentage}%`;
-            
-            // Mise à jour du niveau
-            const level = calculateLevel(totalCorrect);
-            document.getElementById('user-level').textContent = level;
-            
-            // Mise à jour de la série (simulation)
-            const streak = calculateStreak();
-            document.getElementById('streak').textContent = streak;
-        }
-
-        function updateSubjectStats() {
-            Object.keys(CONFIG.subjects).forEach(subject => {
-                const stats = userStats[subject];
-                const total = stats.correct + stats.incorrect;
-                const percentage = total > 0 ? Math.round((stats.correct / total) * 100) : 0;
-                
-                // Mise à jour des scores
-                const scoreEl = document.getElementById(`${subject}-score`);
-                const doneEl = document.getElementById(`${subject}-done`);
-                const progressEl = document.getElementById(`${subject}-progress`);
-                
-                if (scoreEl) scoreEl.textContent = `${percentage}%`;
-                if (doneEl) doneEl.textContent = total;
-                if (progressEl) {
-                    const progressPercentage = questionsDatabase[subject] ? 
-                        Math.round((total / questionsDatabase[subject].length) * 100) : 0;
-                    progressEl.style.width = `${progressPercentage}%`;
-                }
-            });
-        }
-
-        function calculateLevel(totalCorrect) {
-            if (totalCorrect < 10) return 'Débutant';
-            if (totalCorrect < 25) return 'Apprenti';
-            if (totalCorrect < 40) return 'Confirmé';
-            if (totalCorrect < 50) return 'Expert';
-            return 'Maître';
-        }
-
-        function calculateStreak() {
-            // Simulation d'une série basée sur l'activité récente
-            const today = new Date().toDateString();
-            const lastActivity = localStorage.getItem('lastActivity');
-            
-            if (lastActivity === today) {
-                return parseInt(localStorage.getItem('currentStreak') || '1');
-            } else {
-                localStorage.setItem('lastActivity', today);
-                localStorage.setItem('currentStreak', '1');
-                return 1;
-            }
-        }
-
-        // Initialisation de l'application
-        document.addEventListener('DOMContentLoaded', () => {
-            updateUI();
-            console.log('Quiz Brevet 2025 - Manon révise - Chargé avec succès !');
-        });
     </script>
 </body>
 </html>
