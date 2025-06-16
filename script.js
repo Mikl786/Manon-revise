@@ -1,13 +1,244 @@
-// Configuration globale
-const CONFIG = {
-    questionsPerQuiz: 20,
-    subjects: {
-        francais: 'Français',
-        maths: 'Mathématiques',
-        histoire: 'Histoire-Géographie',
-        sciences: 'Sciences (SVT)',
-        physique: 'Physique-Chimie'
-    }
+// Base de données des questions
+const questionsData = {
+    francais: [
+        {
+            id: 1,
+            question: "Quel genre littéraire est privilégié pour explorer le thème 'Se chercher, se construire' ?",
+            answers: ["L'autobiographie", "Le théâtre", "La poésie", "Le roman policier"],
+            correct: 0,
+            explanation: "L'autobiographie permet d'explorer la construction de soi et l'identité personnelle, thème central du programme de 3ème.",
+            difficulty: "facile",
+            theme: "genres_litteraires"
+        },
+        {
+            id: 2,
+            question: "Dans 'Les Confessions' de Rousseau, quel est l'objectif principal de l'auteur ?",
+            answers: ["Divertir le lecteur", "Se justifier et se révéler", "Critiquer la société", "Raconter l'Histoire"],
+            correct: 1,
+            explanation: "Rousseau cherche à se montrer tel qu'il est, avec ses défauts et qualités, dans un souci de sincérité totale.",
+            difficulty: "moyen",
+            theme: "autobiographie"
+        },
+        {
+            id: 3,
+            question: "Identifiez la figure de style : 'Ses yeux sont des étoiles'",
+            answers: ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+            correct: 1,
+            explanation: "C'est une métaphore car il y a assimilation directe sans outil de comparaison comme 'comme' ou 'tel que'.",
+            difficulty: "facile",
+            theme: "figures_de_style"
+        },
+        {
+            id: 4,
+            question: "Au théâtre, comment appelle-t-on les paroles qu'un personnage se dit à lui-même ?",
+            answers: ["Monologue", "Dialogue", "Aparté", "Soliloque"],
+            correct: 0,
+            explanation: "Le monologue est un discours d'un personnage seul sur scène qui exprime ses pensées.",
+            difficulty: "facile",
+            theme: "theatre"
+        },
+        {
+            id: 5,
+            question: "Combien de syllabes compte un alexandrin ?",
+            answers: ["10", "12", "8", "14"],
+            correct: 1,
+            explanation: "L'alexandrin est un vers de douze syllabes, très utilisé en poésie classique française.",
+            difficulty: "facile",
+            theme: "versification"
+        }
+    ],
+    
+    maths: [
+        {
+            id: 1,
+            question: "Résoudre l'équation : 3x + 5 = 14",
+            answers: ["x = 3", "x = 4", "x = 5", "x = 6"],
+            correct: 0,
+            explanation: "3x = 14 - 5 = 9, donc x = 9/3 = 3",
+            difficulty: "facile",
+            theme: "equations"
+        },
+        {
+            id: 2,
+            question: "Si f(x) = 2x + 3, que vaut f(4) ?",
+            answers: ["11", "10", "9", "8"],
+            correct: 0,
+            explanation: "f(4) = 2×4 + 3 = 8 + 3 = 11",
+            difficulty: "facile",
+            theme: "fonctions"
+        },
+        {
+            id: 3,
+            question: "Dans un triangle rectangle, si les côtés de l'angle droit mesurent 3 et 4, l'hypoténuse mesure :",
+            answers: ["5", "6", "7", "25"],
+            correct: 0,
+            explanation: "D'après le théorème de Pythagore : c² = 3² + 4² = 9 + 16 = 25, donc c = 5",
+            difficulty: "moyen",
+            theme: "geometrie"
+        },
+        {
+            id: 4,
+            question: "Dans la série : 2, 5, 7, 8, 10, la médiane est :",
+            answers: ["6", "7", "8", "6.4"],
+            correct: 1,
+            explanation: "La médiane est la valeur centrale quand les données sont ordonnées : 7 (3ème valeur sur 5)",
+            difficulty: "moyen",
+            theme: "statistiques"
+        },
+        {
+            id: 5,
+            question: "Développer : (x + 3)(x - 2)",
+            answers: ["x² + x - 6", "x² - x - 6", "x² + x + 6", "x² - x + 6"],
+            correct: 0,
+            explanation: "(x+3)(x-2) = x² - 2x + 3x - 6 = x² + x - 6",
+            difficulty: "moyen",
+            theme: "calcul_litteral"
+        }
+    ],
+    
+    histoire: [
+        {
+            id: 1,
+            question: "Quelle est la date de l'indépendance de l'Inde ?",
+            answers: ["1945", "1947", "1950", "1952"],
+            correct: 1,
+            explanation: "L'Inde obtient son indépendance le 15 août 1947, avec partition entre Inde et Pakistan.",
+            difficulty: "facile",
+            theme: "decolonisation"
+        },
+        {
+            id: 2,
+            question: "La Ve République est fondée en :",
+            answers: ["1956", "1958", "1960", "1962"],
+            correct: 1,
+            explanation: "La Constitution de la Ve République est adoptée par référendum le 28 septembre 1958.",
+            difficulty: "facile",
+            theme: "ve_republique"
+        },
+        {
+            id: 3,
+            question: "La guerre froide commence vers :",
+            answers: ["1945", "1947", "1949", "1950"],
+            correct: 1,
+            explanation: "1947 marque le début avec la doctrine Truman et le plan Marshall.",
+            difficulty: "moyen",
+            theme: "guerre_froide"
+        },
+        {
+            id: 4,
+            question: "Les femmes obtiennent le droit de vote en France en :",
+            answers: ["1936", "1944", "1946", "1958"],
+            correct: 1,
+            explanation: "L'ordonnance du 21 avril 1944 accorde le droit de vote aux femmes françaises.",
+            difficulty: "facile",
+            theme: "societe_francaise"
+        },
+        {
+            id: 5,
+            question: "Une aire urbaine comprend :",
+            answers: ["Seulement la ville-centre", "La ville-centre et sa banlieue", "La ville-centre, sa banlieue et sa couronne périurbaine", "Toute la région"],
+            correct: 2,
+            explanation: "L'aire urbaine inclut le pôle urbain (ville-centre + banlieue) et la couronne périurbaine.",
+            difficulty: "moyen",
+            theme: "geographie_urbaine"
+        }
+    ],
+    
+    sciences: [
+        {
+            id: 1,
+            question: "La fécondation a lieu dans :",
+            answers: ["L'ovaire", "L'utérus", "La trompe de Fallope", "Le vagin"],
+            correct: 2,
+            explanation: "La fécondation se produit dans la trompe de Fallope, aussi appelée trompe utérine.",
+            difficulty: "facile",
+            theme: "reproduction"
+        },
+        {
+            id: 2,
+            question: "Un chromosome contient :",
+            answers: ["De l'ARN", "De l'ADN", "Des protéines", "Des lipides"],
+            correct: 1,
+            explanation: "Les chromosomes sont constitués d'ADN (acide désoxyribonucléique) et de protéines.",
+            difficulty: "facile",
+            theme: "genetique"
+        },
+        {
+            id: 3,
+            question: "L'être humain possède :",
+            answers: ["23 chromosomes", "46 chromosomes", "48 chromosomes", "44 chromosomes"],
+            correct: 1,
+            explanation: "L'être humain possède 46 chromosomes (23 paires) dans chaque cellule.",
+            difficulty: "facile",
+            theme: "genetique"
+        },
+        {
+            id: 4,
+            question: "La dérive des continents est proposée par :",
+            answers: ["Darwin", "Wegener", "Mendel", "Pasteur"],
+            correct: 1,
+            explanation: "Alfred Wegener propose la théorie de la dérive des continents en 1912.",
+            difficulty: "moyen",
+            theme: "geologie"
+        },
+        {
+            id: 5,
+            question: "Le neurone est :",
+            answers: ["Une cellule musculaire", "Une cellule nerveuse", "Une cellule sanguine", "Une cellule osseuse"],
+            correct: 1,
+            explanation: "Le neurone est la cellule de base du système nerveux qui transmet l'information.",
+            difficulty: "facile",
+            theme: "systeme_nerveux"
+        }
+    ],
+    
+    physique: [
+        {
+            id: 1,
+            question: "Un atome est constitué :",
+            answers: ["Seulement de protons", "D'un noyau et d'électrons", "Seulement d'électrons", "De molécules"],
+            correct: 1,
+            explanation: "L'atome comprend un noyau (protons + neutrons) et des électrons qui gravitent autour.",
+            difficulty: "facile",
+            theme: "structure_matiere"
+        },
+        {
+            id: 2,
+            question: "La vitesse se calcule par :",
+            answers: ["v = d × t", "v = d / t", "v = t / d", "v = d + t"],
+            correct: 1,
+            explanation: "La vitesse est égale à la distance parcourue divisée par le temps : v = d/t.",
+            difficulty: "facile",
+            theme: "mecanique"
+        },
+        {
+            id: 3,
+            question: "Dans un circuit en série, l'intensité :",
+            answers: ["Varie", "Est la même partout", "Diminue", "Augmente"],
+            correct: 1,
+            explanation: "Dans un circuit en série, l'intensité est identique en tous points du circuit.",
+            difficulty: "facile",
+            theme: "electricite"
+        },
+        {
+            id: 4,
+            question: "La charge d'un proton est :",
+            answers: ["Positive", "Négative", "Neutre", "Variable"],
+            correct: 0,
+            explanation: "Le proton porte une charge électrique positive (+e).",
+            difficulty: "facile",
+            theme: "structure_matiere"
+        },
+        {
+            id: 5,
+            question: "La formule chimique de l'eau est :",
+            answers: ["H₂O", "HO₂", "H₃O", "H₂O₂"],
+            correct: 0,
+            explanation: "L'eau est constituée de 2 atomes d'hydrogène et 1 atome d'oxygène : H₂O.",
+            difficulty: "facile",
+            theme: "chimie"
+        }
+    ]
 };
 
 // Variables globales
@@ -17,168 +248,41 @@ let currentQuestionIndex = 0;
 let score = 0;
 let selectedAnswer = null;
 let userStats = loadStats();
-let allQuestions = {};
 
-// Classe principale de l'application
-class QuizApp {
-    constructor() {
-        this.init();
-    }
+// Noms des matières
+const subjectNames = {
+    francais: 'Français',
+    maths: 'Mathématiques',
+    histoire: 'Histoire-Géographie',
+    sciences: 'Sciences (SVT)',
+    physique: 'Physique-Chimie'
+};
 
-    async init() {
-        try {
-            await this.loadAllQuestions();
-            this.updateUI();
-            this.hideLoading();
-        } catch (error) {
-            console.error('Erreur d\'initialisation:', error);
-            this.showError('Erreur de chargement des questions');
-        }
-    }
-
-    async loadAllQuestions() {
-        const subjects = Object.keys(CONFIG.subjects);
-        const promises = subjects.map(subject => this.loadQuestions(subject));
-        
-        try {
-            const results = await Promise.all(promises);
-            subjects.forEach((subject, index) => {
-                allQuestions[subject] = results[index];
-            });
-        } catch (error) {
-            throw new Error('Impossible de charger les questions');
-        }
-    }
-
-    async loadQuestions(subject) {
-        try {
-            const response = await fetch(`data/${subject}.json`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error(`Erreur de chargement pour ${subject}:`, error);
-            return [];
-        }
-    }
-
-    updateUI() {
-        this.updateGlobalStats();
-        this.updateSubjectStats();
-    }
-
-    updateGlobalStats() {
-        const totalCorrect = Object.values(userStats).reduce((sum, stat) => sum + stat.correct, 0);
-        const totalAnswered = Object.values(userStats).reduce((sum, stat) => sum + stat.correct + stat.incorrect, 0);
-        const globalPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-
-        document.getElementById('global-score').textContent = `${globalPercentage}%`;
-        
-        // Mise à jour du niveau
-        const level = this.calculateLevel(totalCorrect);
-        document.getElementById('user-level').textContent = level;
-        
-        // Mise à jour de la série (simulation)
-        const streak = this.calculateStreak();
-        document.getElementById('streak').textContent = streak;
-    }
-
-    updateSubjectStats() {
-        Object.keys(CONFIG.subjects).forEach(subject => {
-            const stats = userStats[subject];
-            const total = stats.correct + stats.incorrect;
-            const percentage = total > 0 ? Math.round((stats.correct / total) * 100) : 0;
-            
-            // Mise à jour des scores
-            const scoreEl = document.getElementById(`${subject}-score`);
-            const doneEl = document.getElementById(`${subject}-done`);
-            const progressEl = document.getElementById(`${subject}-progress`);
-            
-            if (scoreEl) scoreEl.textContent = `${percentage}%`;
-            if (doneEl) doneEl.textContent = total;
-            if (progressEl) {
-                const progressPercentage = allQuestions[subject] ? 
-                    Math.round((total / allQuestions[subject].length) * 100) : 0;
-                progressEl.style.width = `${progressPercentage}%`;
-            }
-        });
-    }
-
-    calculateLevel(totalCorrect) {
-        if (totalCorrect < 50) return 'Débutant';
-        if (totalCorrect < 150) return 'Apprenti';
-        if (totalCorrect < 300) return 'Confirmé';
-        if (totalCorrect < 500) return 'Expert';
-        return 'Maître';
-    }
-
-    calculateStreak() {
-        // Simulation d'une série basée sur l'activité récente
-        const today = new Date().toDateString();
-        const lastActivity = localStorage.getItem('lastActivity');
-        
-        if (lastActivity === today) {
-            return parseInt(localStorage.getItem('currentStreak') || '1');
-        } else {
-            localStorage.setItem('lastActivity', today);
-            localStorage.setItem('currentStreak', '1');
-            return 1;
-        }
-    }
-
-    hideLoading() {
-        const loading = document.getElementById('loading');
-        if (loading) {
-            loading.classList.add('hidden');
-        }
-    }
-
-    showError(message) {
-        const loading = document.getElementById('loading');
-        if (loading) {
-            loading.innerHTML = `
-                <div style="text-align: center;">
-                    <h2>❌ Erreur</h2>
-                    <p>${message}</p>
-                    <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 10px; cursor: pointer;">
-                        Réessayer
-                    </button>
-                </div>
-            `;
-        }
-    }
-}
-
-// Fonctions principales du quiz
-async function startQuiz(subject) {
-    if (!allQuestions[subject] || allQuestions[subject].length === 0) {
-        alert('Questions non disponibles pour cette matière');
-        return;
-    }
-
+// Démarrer un quiz
+function startQuiz(subject) {
     currentSubject = subject;
-    currentQuestions = shuffleArray([...allQuestions[subject]]).slice(0, CONFIG.questionsPerQuiz);
+    currentQuestions = questionsData[subject];
     currentQuestionIndex = 0;
     score = 0;
     selectedAnswer = null;
 
-    // Interface
+    // Masquer le menu et afficher le quiz
     document.getElementById('menu').style.display = 'none';
     document.getElementById('quiz').style.display = 'block';
 
-    // Mise à jour de l'en-tête
-    document.getElementById('current-subject').textContent = CONFIG.subjects[subject];
+    // Mettre à jour l'en-tête
+    document.getElementById('current-subject').textContent = subjectNames[subject];
     document.getElementById('total-questions').textContent = currentQuestions.length;
 
+    // Afficher la première question
     showQuestion();
 }
 
+// Afficher une question
 function showQuestion() {
     const question = currentQuestions[currentQuestionIndex];
     
-    // Mise à jour des informations
+    // Mettre à jour les informations
     document.getElementById('current-question').textContent = currentQuestionIndex + 1;
     document.getElementById('question-num').textContent = currentQuestionIndex + 1;
     document.getElementById('question-text').textContent = question.question;
@@ -188,7 +292,7 @@ function showQuestion() {
     const stars = getDifficultyStars(question.difficulty || 'moyen');
     difficultyEl.textContent = stars;
 
-    // Génération des réponses
+    // Générer les réponses
     const container = document.getElementById('answers-container');
     container.innerHTML = '';
 
@@ -200,7 +304,7 @@ function showQuestion() {
         container.appendChild(div);
     });
 
-    // Réinitialisation des boutons
+    // Réinitialiser les boutons
     document.getElementById('validate-btn').disabled = true;
     document.getElementById('validate-btn').style.display = 'inline-flex';
     document.getElementById('next-btn').style.display = 'none';
@@ -314,7 +418,6 @@ function finishQuiz() {
         <div style="margin: 20px 0;">
             <p><strong>Bonnes réponses :</strong> ${score}</p>
             <p><strong>Erreurs :</strong> ${currentQuestions.length - score}</p>
-            <p><strong>Temps moyen par question :</strong> ~30 secondes</p>
         </div>
         <button class="btn" onclick="backToMenu()" style="margin-top: 20px;">
             🏠 Retour au menu principal
@@ -326,9 +429,6 @@ function finishQuiz() {
 
     document.getElementById('explanation').appendChild(finalScoreDiv);
     document.getElementById('finish-btn').style.display = 'none';
-    
-    // Mise à jour des statistiques globales
-    app.updateUI();
 }
 
 function backToMenu() {
@@ -345,21 +445,14 @@ function updateScore() {
     document.getElementById('percentage').textContent = `${percentage}%`;
 }
 
-// Fonctions utilitaires
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
-
 function loadStats() {
-    const defaultStats = {};
-    Object.keys(CONFIG.subjects).forEach(subject => {
-        defaultStats[subject] = { correct: 0, incorrect: 0 };
-    });
+    const defaultStats = {
+        francais: { correct: 0, incorrect: 0 },
+        maths: { correct: 0, incorrect: 0 },
+        histoire: { correct: 0, incorrect: 0 },
+        sciences: { correct: 0, incorrect: 0 },
+        physique: { correct: 0, incorrect: 0 }
+    };
 
     const saved = localStorage.getItem('brevetQuizStats2025');
     return saved ? { ...defaultStats, ...JSON.parse(saved) } : defaultStats;
@@ -369,13 +462,5 @@ function saveStats() {
     localStorage.setItem('brevetQuizStats2025', JSON.stringify(userStats));
 }
 
-// Initialisation de l'application
-let app;
-document.addEventListener('DOMContentLoaded', () => {
-    app = new QuizApp();
-});
-
-// Gestion des erreurs globales
-window.addEventListener('error', (event) => {
-    console.error('Erreur globale:', event.error);
-});
+// Initialisation
+console.log('Quiz Brevet 2025 - Manon révise - Chargé avec succès !');
