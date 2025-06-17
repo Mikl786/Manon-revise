@@ -889,38 +889,58 @@
         }
 
         function validateAnswer() {
-            if (selectedAnswer === null) return;
+    if (selectedAnswer === null) return;
 
-            const question = currentQuiz.questions[currentQuestionIndex];
-            const isCorrect = selectedAnswer === question.c;
+    const question = currentQuiz.questions[currentQuestionIndex];
+    const isCorrect = selectedAnswer === question.c;
 
-            if (isCorrect) score++;
+    if (isCorrect) score++;
 
-            document.querySelectorAll('.answer-option').forEach((option, index) => {
-                option.onclick = null;
-                
-                if (index === question.c) {
-                    option.classList.add('correct');
-                } else if (index === selectedAnswer && !isCorrect) {
-                    option.classList.add('incorrect');
-                }
-            });
+    // Coloration des réponses
+    document.querySelectorAll('.answer-option').forEach((option, index) => {
+        option.onclick = null;
+        
+        if (index === question.c) {
+            option.classList.add('correct');
+        } else if (index === selectedAnswer && !isCorrect) {
+            option.classList.add('incorrect');
+        }
+    });
 
-            document.getElementById('explanation').innerHTML = `<strong>💡 ${question.e}</strong>`;
-            document.getElementById('explanation').style.display = 'block';
-            document.getElementById('validate-btn').style.display = 'none';
+    // Affichage de l'explication
+    document.getElementById('explanation').innerHTML = `<strong>💡 ${question.e}</strong>`;
+    document.getElementById('explanation').style.display = 'block';
+    
+    // Masquer le bouton valider
+    document.getElementById('validate-btn').style.display = 'none';
 
-            if (currentQuestionIndex < currentQuiz.questionCount - 1) {
-                document.getElementById('next-btn').style.display = 'inline-block';
-            } else {
-                document.getElementById('finish-btn').style.display = 'inline-block';
-            }
-            updateScore();
+    // CORRECTION : Afficher le bon bouton selon la position
+    if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+        // Pas la dernière question -> bouton Suivant
+        document.getElementById('next-btn').style.display = 'inline-block';
+        document.getElementById('finish-btn').style.display = 'none';
+    } else {
+        // Dernière question -> bouton Terminer
+        document.getElementById('next-btn').style.display = 'none';
+        document.getElementById('finish-btn').style.display = 'inline-block';
+    }
+    
+    updateScore();
+}
+
         }
 
         function nextQuestion() {
-            currentQuestionIndex++;
-            showQuestion();
+    currentQuestionIndex++;
+    
+    // Réafficher le bouton valider pour la prochaine question
+    document.getElementById('validate-btn').style.display = 'inline-block';
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('finish-btn').style.display = 'none';
+    
+    showQuestion();
+}
+
         }
 
         function finishQuiz() {
