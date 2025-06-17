@@ -1,0 +1,222 @@
+{
+  "francais": [
+    {
+      "title": "Les figures de style",
+      "questions": [
+        {
+          "q": "Identifiez la figure de style : 'Ses yeux sont des étoiles'",
+          "a": ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+          "c": 1,
+          "e": "C'est une métaphore car il y a assimilation directe sans outil de comparaison."
+        },
+        {
+          "q": "Dans 'Le vent souffle et murmure', quelle figure de style ?",
+          "a": ["Métaphore", "Personnification", "Allitération", "Oxymore"],
+          "c": 1,
+          "e": "Le vent est doté de capacités humaines (personnification)."
+        },
+        {
+          "q": "L'anaphore consiste à :",
+          "a": ["Répéter un mot en fin", "Répéter un mot en début", "Inverser l'ordre", "Supprimer des mots"],
+          "c": 1,
+          "e": "L'anaphore répète un mot en début de phrases successives."
+        },
+        {
+          "q": "Qu'est-ce qu'un oxymore ?",
+          "a": ["Une répétition", "Une contradiction", "Une exagération", "Une comparaison"],
+          "c": 1,
+          "e": "L'oxymore associe deux termes contradictoires."
+        },
+        {
+          "q": "'Blanc comme neige' est une :",
+          "a": ["Métaphore", "Comparaison", "Personnification", "Allitération"],
+          "c": 1,
+          "e": "Présence de l'outil de comparaison 'comme'."
+        }
+      ]
+    },
+    {
+      "title": "Les fonctions grammaticales",
+      "questions": [
+        {
+          "q": "Dans 'Je donne ce livre à mon frère', quelle fonction a 'à mon frère' ?",
+          "a": ["COD", "COI", "Complément du nom", "Attribut"],
+          "c": 1,
+          "e": "'À mon frère' est un complément d'objet indirect."
+        },
+        {
+          "q": "Le sujet peut être :",
+          "a": ["Un nom", "Un pronom", "Un groupe nominal", "Toutes ces réponses"],
+          "c": 3,
+          "e": "Le sujet peut prendre toutes ces formes."
+        },
+        {
+          "q": "Dans 'Paul mange une pomme', 'une pomme' est :",
+          "a": ["Sujet", "COD", "COI", "Attribut"],
+          "c": 1,
+          "e": "Complément d'objet direct du verbe 'mange'."
+        },
+        {
+          "q": "L'attribut du sujet se trouve après :",
+          "a": ["Un verbe d'action", "Un verbe d'état", "Un auxiliaire", "N'importe quel verbe"],
+          "c": 1,
+          "e": "L'attribut suit les verbes d'état (être, paraître, sembler...)."
+        },
+        {
+          "q": "Dans 'Il parle de son voyage', 'de son voyage' est :",
+          "a": ["COD", "COI", "Complément circonstanciel", "Attribut"],
+          "c": 1,
+          "e": "COI introduit par la préposition 'de'."
+        }
+      ]
+    }
+  ],
+  "maths": [
+    {
+      "title": "Résolutions d'équations",
+      "questions": [
+        {
+          "q": "Résoudre : 3x + 5 = 14",
+          "a": ["x = 3", "x = 4", "x = 5", "x = 6"],
+          "c": 0,
+          "e": "3x = 14 - 5 = 9, donc x = 3"
+        },
+        {
+          "q": "Résoudre : 2x - 7 = 3",
+          "a": ["x = 5", "x = 2", "x = -2", "x = 10"],
+          "c": 0,
+          "e": "2x = 3 + 7 = 10, donc x = 5"
+        },
+        {
+          "q": "Résoudre : 5x = 25",
+          "a": ["x = 5", "x = 20", "x = 30", "x = 125"],
+          "c": 0,
+          "e": "x = 25/5 = 5"
+        },
+        {
+          "q": "Résoudre : x/3 = 4",
+          "a": ["x = 12", "x = 7", "x = 1", "x = 4/3"],
+          "c": 0,
+          "e": "x = 4 × 3 = 12"
+        },
+        {
+          "q": "Résoudre : 2x + 3 = x + 8",
+          "a": ["x = 5", "x = 11", "x = 2", "x = -5"],
+          "c": 0,
+          "e": "2x - x = 8 - 3, donc x = 5"
+        }
+      ]
+    }
+  ],
+  "histoire": [
+    {
+      "title": "La Ve République",
+      "questions": [
+        {
+          "q": "La Ve République est fondée en :",
+          "a": ["1956", "1958", "1960", "1962"],
+          "c": 1,
+          "e": "Constitution adoptée par référendum le 28 septembre 1958."
+        },
+        {
+          "q": "Premier président de la Ve République :",
+          "a": ["René Coty", "Charles de Gaulle", "Georges Pompidou", "Vincent Auriol"],
+          "c": 1,
+          "e": "Charles de Gaulle, élu en décembre 1958."
+        },
+        {
+          "q": "Élection présidentielle au suffrage universel direct depuis :",
+          "a": ["1958", "1962", "1965", "1969"],
+          "c": 1,
+          "e": "Référendum du 28 octobre 1962."
+        },
+        {
+          "q": "Durée du mandat présidentiel actuel :",
+          "a": ["4 ans", "5 ans", "6 ans", "7 ans"],
+          "c": 1,
+          "e": "Quinquennat depuis 2002."
+        },
+        {
+          "q": "Le président nomme :",
+          "a": ["Les ministres", "Le Premier ministre", "Les préfets", "Toutes ces réponses"],
+          "c": 3,
+          "e": "Le président a un large pouvoir de nomination."
+        }
+      ]
+    }
+  ],
+  "sciences": [
+    {
+      "title": "La reproduction et la sexualité",
+      "questions": [
+        {
+          "q": "La fécondation a lieu dans :",
+          "a": ["L'ovaire", "L'utérus", "La trompe de Fallope", "Le vagin"],
+          "c": 2,
+          "e": "Rencontre ovule-spermatozoïde dans la trompe."
+        },
+        {
+          "q": "La puberté correspond à :",
+          "a": ["La croissance", "La maturation sexuelle", "L'adolescence", "Le développement"],
+          "c": 1,
+          "e": "Acquisition de la capacité de reproduction."
+        },
+        {
+          "q": "Les gamètes contiennent :",
+          "a": ["23 chromosomes", "46 chromosomes", "22 chromosomes", "24 chromosomes"],
+          "c": 0,
+          "e": "Cellules haploïdes (n = 23)."
+        },
+        {
+          "q": "L'ovulation se produit :",
+          "a": ["Tous les jours", "Toutes les semaines", "Tous les mois", "Tous les ans"],
+          "c": 2,
+          "e": "Cycle menstruel de 28 jours environ."
+        },
+        {
+          "q": "La nidation est :",
+          "a": ["La fécondation", "L'implantation de l'embryon", "L'ovulation", "L'accouchement"],
+          "c": 1,
+          "e": "Fixation de l'embryon dans l'utérus."
+        }
+      ]
+    }
+  ],
+  "physique": [
+    {
+      "title": "L'électricité",
+      "questions": [
+        {
+          "q": "Circuit série, intensité :",
+          "a": ["Varie", "Même partout", "Diminue", "Augmente"],
+          "c": 1,
+          "e": "Intensité identique en tous points."
+        },
+        {
+          "q": "Loi d'Ohm :",
+          "a": ["U = R × I", "I = U × R", "R = U × I", "U = I / R"],
+          "c": 0,
+          "e": "Tension = Résistance × Intensité"
+        },
+        {
+          "q": "Charge du proton :",
+          "a": ["Positive", "Négative", "Neutre", "Variable"],
+          "c": 0,
+          "e": "Charge électrique positive (+e)."
+        },
+        {
+          "q": "Court-circuit se produit quand :",
+          "a": ["Résistance très grande", "Résistance très faible", "Pas de courant", "Tension nulle"],
+          "c": 1,
+          "e": "Résistance faible = courant intense."
+        },
+        {
+          "q": "Puissance électrique :",
+          "a": ["P = U / I", "P = U × I", "P = U - I", "P = U + I"],
+          "c": 1,
+          "e": "Puissance = Tension × Intensité"
+        }
+      ]
+    }
+  ]
+}
